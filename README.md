@@ -1,0 +1,2 @@
+# MyMagicMirror
+MyMagicMirror
