@@ -1,12 +1,24 @@
 /* MODULE CLOCK */
+const months = ['janvier','février','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
+const days = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
 
 function getTime() {
     let dt = new Date();
     let hours= dt.getHours();
     let min= dt.getMinutes();
     let sec= dt.getSeconds();
-    let time = addZero(hours) + ":" + addZero(min) + ":" + addZero(sec) ;
-    return time;
+    htmlSet("time", addZero(hours) + ":" + addZero(min) + ":" + addZero(sec));
+    if (hours == 0 && min == 0 && sec == 0) {
+        getDate();
+    }
+}
+
+function getDate() {
+    let dt = new Date();
+    let day= dt.getDay();
+    let date= dt.getDate();
+    let month= dt.getMonth();
+    htmlSet( "date", days[day - 1] + " " + date + " " + months[month] );
 }
 
 function addZero(value) {
@@ -14,11 +26,9 @@ function addZero(value) {
     return value;
 }
 
-function displayTime() {
-    htmlSet("time", getTime());
-}
+setInterval(function(){ getTime(); }, 1000);
+getDate();
 
-// setInterval(function(){ displayTime(); }, 1000);
 
 /* MODULE METEO */
 function callMeteo() {
@@ -52,18 +62,35 @@ function setMeteoNow(res) {
     let descrTemps = res.weather[0].description;
     let icon = res.weather[0].icon;
     let iconSource = "http://openweathermap.org/img/w/" + icon + ".png";
-    console.log(iconSource);
 
     htmlSet("vitesseVentActuel", vent);
     htmlSet("tempActual", temp);
     htmlSet("descriptionActual", descrTemps);
-
     document.getElementById("weatherImage").src = iconSource;
 
 }
 
 function setMeteoForecast(res) {
     console.log(res)
+
+    // for each day between 7am and 10pm
+    for ( let f of res.list) {
+        let dt = new Date();
+        let fdate = date.parse(f.dt);
+        console.log(fdate)
+        console.log(dt)
+        if ( fdate.getDay() == dt.getDay() ) {
+            console.log(f);
+        }
+    }
+    // take min
+
+    // take max
+
+    // average wind
+
+    // icon
+
 }
 
 function convertWindSpeed( speed ) {
