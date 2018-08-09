@@ -3,27 +3,23 @@ const months = ['janvier','février','mars','avril','mai','juin','juillet','aout
 const days = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
 
 function getTime() {
-    let dt = new Date();
-    let hours= dt.getHours();
-    let min= dt.getMinutes();
-    let sec= dt.getSeconds();
-    htmlSet("time", addZero(hours) + ":" + addZero(min) + ":" + addZero(sec));
-    if (hours == 0 && min == 0 && sec == 0) {
-        getDate();
-    }
+    let dt    = new Date();
+    let hours = dt.getHours().toString().padStart(2,"0");
+    let min   = dt.getMinutes().toString().padStart(2,"0");
+    let sec   = dt.getSeconds().toString().padStart(2,"0");
+
+    htmlSet("time", hours + ":" + min + ":" + sec);
+
+    if (hours == 0 && min == 0) getDate();
 }
 
 function getDate() {
-    let dt = new Date();
-    let day= dt.getDay();
-    let date= dt.getDate();
-    let month= dt.getMonth();
-    htmlSet( "date", days[day - 1] + " " + date + " " + months[month] );
-}
+    let dt    = new Date();
+    let day   = dt.getDay();
+    let date  = dt.getDate();
+    let month = dt.getMonth();
 
-function addZero(value) {
-    if (value < 10) value = "0" + value;
-    return value;
+    htmlSet( "date", days[day - 1] + " " + date + " " + months[month] );
 }
 
 setInterval(function(){ getTime(); }, 1000);
@@ -31,28 +27,27 @@ getDate();
 
 
 /* MODULE METEO */
+let previsions = [];
+for ( let i=0 ; i<6 ; i++ ) {
+    previsions[i] = {
+        tempMin: 0,
+        tempMax: 0,
+        wind: 0,
+    }
+}
+
 function callMeteo() {
-    const url = "http://api.openweathermap.org/data/2.5/weather?APPID=c3581901e61477aaa07f4410fe9868c3&id=3021372&lang=fr&units=metric";
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            setMeteoNow( JSON.parse(this.responseText) );
-        }
-    };
-    xhttp.open( "GET", url, true);
-    xhttp.send();
+    callWebService(
+        'http://api.openweathermap.org/data/2.5/weather?APPID=c3581901e61477aaa07f4410fe9868c3&id=3021372&lang=fr&units=metric',
+        setMeteoNow
+    )
 }
 
 function callMeteoForecast() {
-    const url = 'http://api.openweathermap.org/data/2.5/forecast?APPID=c3581901e61477aaa07f4410fe9868c3&id=3021372&lang=fr&units=metric';
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            setMeteoForecast( JSON.parse(this.responseText) );
-        }
-    };
-    xhttp.open( "GET", url, true);
-    xhttp.send();
+    callWebService(
+        'http://api.openweathermap.org/data/2.5/forecast?APPID=c3581901e61477aaa07f4410fe9868c3&id=3021372&lang=fr&units=metric',
+         setMeteoForecast
+    )
 }
 
 function setMeteoNow(res) {
@@ -73,16 +68,27 @@ function setMeteoNow(res) {
 function setMeteoForecast(res) {
     console.log(res)
 
-    // for each day between 7am and 10pm
+    // var test = new Date(1533654000*1000);
+    let today = new Date();
+
     for ( let f of res.list) {
-        let dt = new Date();
-        let fdate = date.parse(f.dt);
-        console.log(fdate)
-        console.log(dt)
-        if ( fdate.getDay() == dt.getDay() ) {
-            console.log(f);
-        }
+
+        // chaque fois qu'on avance d'un jour on incrémente le tableau de prévisions
+        let jourPrev = new Date( f.dt * 1000);
+
+        // recup de l'index de prevision
+        let n = jourPrev.getDate() - today.getDate();
+
+        // TODO: add condition for hours (7h - 22h)
+
+        // set tempMin
+        previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
+            f.main.temp_min : previsions[n].tempMin ;
+
+
+
     }
+    console.log(previsions)
     // take min
 
     // take max
@@ -108,6 +114,18 @@ function convertWindSpeed( speed ) {
 
  */
 
+/* HELPERS */
 function htmlSet(id, value) {
     document.getElementById(id).innerHTML = value;
+}
+
+function callWebService(url, callback) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            callback( JSON.parse(this.responseText) );
+        }
+    };
+    xhttp.open( "GET", url, true);
+    xhttp.send();
 }
