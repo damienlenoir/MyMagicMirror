@@ -66,7 +66,7 @@ function setMeteoNow(res) {
 }
 
 function setMeteoForecast(res) {
-    //console.log(res)
+    console.log(res)
     let today = new Date();
 
     for ( let f of res.list) {
@@ -89,13 +89,29 @@ function setMeteoForecast(res) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
         buildForecastHTML( previsions[i], i );
     }
-    //console.log(previsions)
+    console.log(previsions)
 }
 
 function buildForecastHTML( prev, index ) {
-
-    console.log(prev);
-    console.log(index);
+    let html =
+        '   <table>\n' +
+        '      <tr>\n' +
+        '         <td><img src="img/wind.png"  class="icon"></td>\n' +
+        '         <td>\n' +
+        '             <span> ' + prev.wind + ' </span> Km/h\n' +
+        '         </td>\n' +
+        '         <td><img src="img/thermo.png" class="icon"></td>\n' +
+        '         <td>\n' +
+        '             <span>' + prev.tempMin + ' / ' +  prev.tempMax + '</span>°C\n' +
+        '         </td>\n' +
+        '         <td>\n' +
+        '             <img id="weatherImage" src=""></td>\n' +
+        '         <td>\n' +
+        '             <span id="descriptionActual"></span>\n' +
+        '         </td>\n' +
+        '      </tr>\n' +
+        '  </table>';
+    htmlSet( 'forecast' + index , html );
 
 }
 
