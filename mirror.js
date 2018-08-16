@@ -33,6 +33,9 @@ for ( let i=0 ; i<6 ; i++ ) {
         tempMin: 0,
         tempMax: 0,
         wind: 0,
+        description: '',
+        logicalCode: '',
+        logo: '',
     }
 }
 
@@ -82,6 +85,45 @@ function setMeteoForecast(res) {
         let baseWind = f.wind.speed;
         previsions[n].wind = ( !previsions[n].wind ) ?
             baseWind : ( f.wind.speed + previsions[n].wind ) / 2 ;
+
+
+        let descrCode = f.weather[0].id.toString();
+        let descrText = f.weather[0].description;
+        let descrIcon = f.weather[0].icon;
+
+        // 6 - 2 - 5 - 3 - 7 - 8
+        // on cherche quel est le pire groupe possible
+        // puis le pire code
+
+        let logicalCode = '';
+        // la on replace le premier char pour trier les groupes logiquement
+        if ( descrCode >= 600 && descrCode > 700 ) {
+            logicalCode = replaceFirstChar(descrCode, '60')
+        }
+        if ( descrCode >= 200 && descrCode > 300 ) {
+            logicalCode = replaceFirstChar(descrCode, '50')
+        }
+        if ( descrCode >= 500 && descrCode > 600 ) {
+            logicalCode = replaceFirstChar(descrCode, '40')
+        }
+        if ( descrCode >= 300 && descrCode > 400 ) {
+            logicalCode = replaceFirstChar(descrCode, '30')
+        }
+        if ( descrCode >= 700 && descrCode > 800 ) {
+            logicalCode = replaceFirstChar(descrCode, '20')
+        }
+        if ( descrCode >= 800 && descrCode > 900 ) {
+            logicalCode = replaceFirstChar(descrCode, '10')
+        }
+
+
+        if ( !previsions[n].logicalCode || logicalCode > previsions[n].logicalCode ) {
+            previsions[n].logicalCode = logicalCode;
+            previsions[n].description = descrText;
+            previsions[n].icon = descrIcon;
+        }
+
+
 
     }
 
@@ -148,4 +190,12 @@ function callWebService(url, callback) {
 
 function convertWindSpeed( speed ) {
     return Math.round( speed * 3.6 );
+}
+
+function replaceFirstChar( string, replaceWith ) {
+    let res = '';
+    for ( let c = 0 ; c < string.length ; c++ ) {
+        res = (c == 0) ? res + replaceWith : res + string[c];
+    }
+    return res;
 }
