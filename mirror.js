@@ -66,42 +66,42 @@ function setMeteoNow(res) {
 }
 
 function setMeteoForecast(res) {
-    console.log(res)
-
-    // var test = new Date(1533654000*1000);
+    //console.log(res)
     let today = new Date();
 
     for ( let f of res.list) {
-
-        // chaque fois qu'on avance d'un jour on incrémente le tableau de prévisions
         let jourPrev = new Date( f.dt * 1000);
-
-        // recup de l'index de prevision
         let n = jourPrev.getDate() - today.getDate();
 
-        // TODO: add condition for hours (7h - 22h)
-
-        // set tempMin
+        // TODO:icon
+        // TODO add time range
         previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
             f.main.temp_min : previsions[n].tempMin ;
-
-
+        previsions[n].tempMax = ( !previsions[n].tempMax || f.main.temp_max > previsions[n].tempMax ) ?
+            f.main.temp_max : previsions[n].tempMax ;
+        let baseWind = f.wind.speed;
+        previsions[n].wind = ( !previsions[n].wind ) ?
+            baseWind : ( f.wind.speed + previsions[n].wind ) / 2 ;
 
     }
-    console.log(previsions)
-    // take min
 
-    // take max
+    for ( let i = 0 ; i < previsions.length ; i++ ) {
+        previsions[i].wind = convertWindSpeed(previsions[i].wind);
+        buildForecastHTML( previsions[i], i );
+    }
+    //console.log(previsions)
+}
 
-    // average wind
+function buildForecastHTML( prev, index ) {
 
-    // icon
+    console.log(prev);
+    console.log(index);
 
 }
 
-function convertWindSpeed( speed ) {
-    return Math.round( speed * 3.6 );
-}
+// setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
+// setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
+
 
 /*  MODULE POST-IT
 - creation boite mail
@@ -128,4 +128,8 @@ function callWebService(url, callback) {
     };
     xhttp.open( "GET", url, true);
     xhttp.send();
+}
+
+function convertWindSpeed( speed ) {
+    return Math.round( speed * 3.6 );
 }
