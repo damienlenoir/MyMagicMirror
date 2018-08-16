@@ -7,9 +7,7 @@ function getTime() {
     let hours = dt.getHours().toString().padStart(2,"0");
     let min   = dt.getMinutes().toString().padStart(2,"0");
     let sec   = dt.getSeconds().toString().padStart(2,"0");
-
     htmlSet("time", hours + ":" + min + ":" + sec);
-
     if (hours == 0 && min == 0) getDate();
 }
 
@@ -18,7 +16,6 @@ function getDate() {
     let day   = dt.getDay();
     let date  = dt.getDate();
     let month = dt.getMonth();
-
     htmlSet( "date", days[day - 1] + " " + date + " " + months[month] );
 }
 
@@ -36,6 +33,7 @@ for ( let i=0 ; i<6 ; i++ ) {
         description: '',
         logicalCode: '',
         logo: '',
+        jourSemaine: '',
     }
 }
 
@@ -54,102 +52,83 @@ function callMeteoForecast() {
 }
 
 function setMeteoNow(res) {
-    console.log(res);
     let vent = convertWindSpeed(res.wind.speed);
     let temp = res.main.temp;
     let descrTemps = res.weather[0].description;
     let icon = res.weather[0].icon;
-    let iconSource = "http://openweathermap.org/img/w/" + icon + ".png";
-
+    let iconSource = "img/" + icon + ".png";
     htmlSet("vitesseVentActuel", vent);
     htmlSet("tempActual", temp);
     htmlSet("descriptionActual", descrTemps);
     document.getElementById("weatherImage").src = iconSource;
-
 }
 
 function setMeteoForecast(res) {
-    console.log(res)
     let today = new Date();
-
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
         let n = jourPrev.getDate() - today.getDate();
-
-        // TODO:icon
-        // TODO add time range
-        previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
-            f.main.temp_min : previsions[n].tempMin ;
-        previsions[n].tempMax = ( !previsions[n].tempMax || f.main.temp_max > previsions[n].tempMax ) ?
-            f.main.temp_max : previsions[n].tempMax ;
-        let baseWind = f.wind.speed;
-        previsions[n].wind = ( !previsions[n].wind ) ?
-            baseWind : ( f.wind.speed + previsions[n].wind ) / 2 ;
-
-
-        let descrCode = f.weather[0].id.toString();
-        let descrText = f.weather[0].description;
-        let descrIcon = f.weather[0].icon;
-
-        // 6 - 2 - 5 - 3 - 7 - 8
-        // on cherche quel est le pire groupe possible
-        // puis le pire code
-
-        let logicalCode = '';
-        // la on replace le premier char pour trier les groupes logiquement
-        if ( descrCode >= 600 && descrCode > 700 ) {
-            logicalCode = replaceFirstChar(descrCode, '60')
+        if ( jourPrev.getHours() > 6 ) {
+            previsions[n].jourSemaine = days[jourPrev.getDay()];
+            previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
+                f.main.temp_min : previsions[n].tempMin ;
+            previsions[n].tempMax = ( !previsions[n].tempMax || f.main.temp_max > previsions[n].tempMax ) ?
+                f.main.temp_max : previsions[n].tempMax ;
+            let baseWind = f.wind.speed;
+            previsions[n].wind = ( !previsions[n].wind ) ?
+                baseWind : ( f.wind.speed + previsions[n].wind ) / 2 ;
+            let descrCode = f.weather[0].id.toString();
+            let descrText = f.weather[0].description;
+            let descrIcon = f.weather[0].icon;
+            let logicalCode = '';
+            if ( descrCode >= 600 && descrCode > 700 ) {
+                logicalCode = replaceFirstChar(descrCode, '60')
+            }
+            if ( descrCode >= 200 && descrCode > 300 ) {
+                logicalCode = replaceFirstChar(descrCode, '50')
+            }
+            if ( descrCode >= 500 && descrCode > 600 ) {
+                logicalCode = replaceFirstChar(descrCode, '40')
+            }
+            if ( descrCode >= 300 && descrCode > 400 ) {
+                logicalCode = replaceFirstChar(descrCode, '30')
+            }
+            if ( descrCode >= 700 && descrCode > 800 ) {
+                logicalCode = replaceFirstChar(descrCode, '20')
+            }
+            if ( descrCode >= 800 && descrCode > 900 ) {
+                logicalCode = replaceFirstChar(descrCode, '10')
+            }
+            if ( !previsions[n].logicalCode || logicalCode > previsions[n].logicalCode ) {
+                previsions[n].logicalCode = logicalCode;
+                previsions[n].description = descrText;
+                previsions[n].icon = descrIcon;
+            }
         }
-        if ( descrCode >= 200 && descrCode > 300 ) {
-            logicalCode = replaceFirstChar(descrCode, '50')
-        }
-        if ( descrCode >= 500 && descrCode > 600 ) {
-            logicalCode = replaceFirstChar(descrCode, '40')
-        }
-        if ( descrCode >= 300 && descrCode > 400 ) {
-            logicalCode = replaceFirstChar(descrCode, '30')
-        }
-        if ( descrCode >= 700 && descrCode > 800 ) {
-            logicalCode = replaceFirstChar(descrCode, '20')
-        }
-        if ( descrCode >= 800 && descrCode > 900 ) {
-            logicalCode = replaceFirstChar(descrCode, '10')
-        }
-
-
-        if ( !previsions[n].logicalCode || logicalCode > previsions[n].logicalCode ) {
-            previsions[n].logicalCode = logicalCode;
-            previsions[n].description = descrText;
-            previsions[n].icon = descrIcon;
-        }
-
-
-
     }
 
     for ( let i = 0 ; i < previsions.length ; i++ ) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
         buildForecastHTML( previsions[i], i );
     }
-    console.log(previsions)
 }
 
 function buildForecastHTML( prev, index ) {
     let html =
         '   <table>\n' +
         '      <tr>\n' +
-        '         <td><img src="img/wind.png"  class="icon"></td>\n' +
+        '         <td>' + prev.jourSemaine + '<img src="img/wind.png"  class="icon"></td>\n' +
         '         <td>\n' +
         '             <span> ' + prev.wind + ' </span> Km/h\n' +
         '         </td>\n' +
-        '         <td><img src="img/thermo.png" class="icon"></td>\n' +
+        '         <td><img src="img/thermo.png" class="icon-thermo"></td>\n' +
         '         <td>\n' +
         '             <span>' + prev.tempMin + ' / ' +  prev.tempMax + '</span>°C\n' +
         '         </td>\n' +
         '         <td>\n' +
-        '             <img id="weatherImage" src=""></td>\n' +
+        '             <img id="weatherImage" class="icon" src="img/' + prev.icon + '.png"></td>\n' +
         '         <td>\n' +
-        '             <span id="descriptionActual"></span>\n' +
+        '             <span id="descriptionActual">' + prev.description + ' </span>\n' +
         '         </td>\n' +
         '      </tr>\n' +
         '  </table>';
