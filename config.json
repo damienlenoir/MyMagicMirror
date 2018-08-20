@@ -1,7 +1,0 @@
-{
-  "user": "adresse-mail",
-  "password": "password",
-  "host": "serveur imap",
-  "port": 993,
-  "tls": true
-}
