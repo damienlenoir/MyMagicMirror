@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6903099c-611d-4162-88c7-9b776989bb10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/img/thermo.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/thermo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/wind.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/wind.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mirror.html" beforeDir="false" afterPath="$PROJECT_DIR$/mirror.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/mirror.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,53 +18,66 @@
     <session id="-1997102332">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.4" value="3" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.4" value="4" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="2" />
-          <entry key="html" value="2" />
-          <entry key="js" value="2" />
+          <entry key="html" value="3" />
+          <entry key="js" value="5" />
+          <entry key="json" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="HTML" value="2" />
-          <entry key="JavaScript" value="2" />
+          <entry key="HTML" value="3" />
+          <entry key="JSON" value="1" />
+          <entry key="JavaScript" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="79" />
-          <entry key="html" value="338" />
-          <entry key="js" value="4198" />
+          <entry key="html" value="505" />
+          <entry key="js" value="4660" />
+          <entry key="json" value="43" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="79" />
-          <entry key="HTML" value="338" />
-          <entry key="JavaScript" value="4198" />
+          <entry key="HTML" value="505" />
+          <entry key="JSON" value="43" />
+          <entry key="JavaScript" value="4660" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.33701947">
+    <splitter split-orientation="horizontal" split-proportion="0.4328594">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mirror.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="465">
-                  <caret line="31" column="72" lean-forward="true" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="72" />
+                <state relative-caret-position="150">
+                  <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/config.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="75">
+                  <caret line="5" column="13" lean-forward="true" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -76,14 +86,23 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/mirror.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="585">
-                  <caret line="120" column="42" selection-start-line="120" selection-start-column="42" selection-end-line="120" selection-end-column="42" />
+                <state relative-caret-position="580">
+                  <caret line="150" column="3" selection-start-line="150" selection-start-column="3" selection-end-line="150" selection-end-column="3" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="420">
+                  <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
                 </state>
               </provider>
             </entry>
@@ -101,15 +120,38 @@
       </split-second>
     </splitter>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="package.json" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>buildAuthUrl</find>
+      <find>client_id</find>
+      <find>The+state+in+the+authorization+response+did+not+match+the+expected+value.+Please+try+signing+in+again.</find>
+      <find>connect-button</find>
+      <find>inbox</find>
+      <find>getus</find>
+      <find>cryp</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/mirror.html" />
         <option value="$PROJECT_DIR$/style.css" />
+        <option value="$PROJECT_DIR$/javascript-tutorial-master/index.html" />
+        <option value="$PROJECT_DIR$/javascript-tutorial-master/outlook-demo.js" />
         <option value="$PROJECT_DIR$/mirror.js" />
+        <option value="$PROJECT_DIR$/mirror.html" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/config.json" />
       </list>
     </option>
   </component>
@@ -120,10 +162,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1950" />
+    <option name="x" value="1919" />
     <option name="y" value="83" />
-    <option name="width" value="1890" />
-    <option name="height" value="1080" />
+    <option name="width" value="1922" />
+    <option name="height" value="1081" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -136,7 +178,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="javascript.nodejs.core.library.configured.version" value="9.11.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../backoffice-angular" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="Errors" />
@@ -168,12 +211,15 @@
       <workItem from="1533628158130" duration="5731000" />
       <workItem from="1533798501660" duration="1704000" />
       <workItem from="1533801328345" duration="97000" />
-      <workItem from="1534407847319" duration="12874000" />
+      <workItem from="1534407847319" duration="15212000" />
+      <workItem from="1534434302071" duration="690000" />
+      <workItem from="1534489190990" duration="8521000" />
+      <workItem from="1534747883066" duration="2314000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35274000" />
+    <option name="totallyTimeSpent" value="49137000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="83" width="1922" height="1081" extended-state="6" />
@@ -183,7 +229,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3297414" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -205,10 +251,27 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mirror.html">
+    <entry file="file://$PROJECT_DIR$/javascript-tutorial-master/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="72" lean-forward="true" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="72" />
+        <state relative-caret-position="388">
+          <caret line="50" column="76" selection-start-line="50" selection-start-column="76" selection-end-line="50" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mirror.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="150" column="3" selection-start-line="150" selection-start-column="3" selection-end-line="150" selection-end-column="3" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javascript-tutorial-master/outlook-demo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5115">
+          <caret line="341" column="13" lean-forward="true" selection-start-line="341" selection-start-column="13" selection-end-line="341" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -219,13 +282,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mirror.js">
+    <entry file="file://$PROJECT_DIR$/mirror.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="120" column="42" selection-start-line="120" selection-start-column="42" selection-end-line="120" selection-end-column="42" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="59" lean-forward="true" selection-start-line="28" selection-start-column="59" selection-end-line="28" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="13" lean-forward="true" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>

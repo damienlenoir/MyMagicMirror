@@ -139,12 +139,15 @@ function buildForecastHTML( prev, index ) {
 // setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 // setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
 
-
 /*  MODULE POST-IT
-- creation boite mail
-- connexion API
-- Affichage
-- fonction STOP
+ boite outlook: mon.miroir.magique@outlook.com
+ Application Id: 45be23b8-a0b6-4ab0-8fe8-d637ab025bd5
+ conf: https://apps.dev.microsoft.com/#/application/45be23b8-a0b6-4ab0-8fe8-d637ab025bd5
+
+ need to install http-server:
+ $ sudo npm install http-server -g
+ $ http-server
+
  */
 
 /* MODULE INDICE VELO
@@ -178,3 +181,4 @@ function replaceFirstChar( string, replaceWith ) {
     }
     return res;
 }
+
