@@ -141,14 +141,19 @@ function buildForecastHTML( prev, index ) {
 
 /*  MODULE POST-IT
  boite outlook: mon.miroir.magique@outlook.com
- Application Id: 45be23b8-a0b6-4ab0-8fe8-d637ab025bd5
- conf: https://apps.dev.microsoft.com/#/application/45be23b8-a0b6-4ab0-8fe8-d637ab025bd5
+ need to install node.js and imap module
 
- need to install http-server:
- $ sudo npm install http-server -g
- $ http-server
-
+ TODO: potentielle memory leak, peut etre faire un script pour redemarrer le serveur tt les jours
+ TODO: Parsing du JSON incorrect
  */
+function callMails() {
+    console.log('mails');
+    callWebService('http://127.0.0.1:3000/', displayMails)
+}
+
+function displayMails(res) {
+    console.log(res);
+}
 
 /* MODULE INDICE VELO
 
