@@ -1,6 +1,7 @@
 const http = require('http');
 const Imap = require('imap');
 var parsedJSON = require('./config.json'); // fichier de conf contenant info de connexion à la boite mail
+var whiteList = require('./whiteListe.json'); // fichier de conf contenant info de connexion à la boite mail
 
 const imap = new Imap(parsedJSON);
 const hostname = '127.0.0.1';
@@ -63,6 +64,12 @@ function getMessages() {
     imap.once('end', function() {
     });
     imap.connect();
+
+    addWhiteList();
+}
+
+function addWhiteList() {
+    messages.push(whiteList)
 }
 
 getMessages();

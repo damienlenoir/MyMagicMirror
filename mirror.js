@@ -151,7 +151,7 @@ function callMails() {
 }
 
 let emails = [];
-for ( let i=0 ; i<8 ; i++ ) {
+for ( let i=0 ; i<9 ; i++ ) {
     emails[i] = {
         exp: 0,
         date: 0,
@@ -160,7 +160,7 @@ for ( let i=0 ; i<8 ; i++ ) {
 }
 
 function displayMails(res) {
-    for ( let i = 0 ; i < 8 ; i++ ) {
+    for ( let i = 1 ; i < 9 ; i++ ) {
         if (res[i]) {
             emails[i].exp = extractExp(res[i].from[0]);
             emails[i].subject = res[i].subject[0];
