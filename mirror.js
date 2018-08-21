@@ -142,17 +142,39 @@ function buildForecastHTML( prev, index ) {
 /*  MODULE POST-IT
  boite outlook: mon.miroir.magique@outlook.com
  need to install node.js and imap module
-
- TODO: potentielle memory leak, peut etre faire un script pour redemarrer le serveur tt les jours
- TODO: Parsing du JSON incorrect
  */
+
+// TODO: faire une white liste qui vient du serveur pour ne pas mettre les mails dans GIT
+
 function callMails() {
-    console.log('mails');
     callWebService('http://127.0.0.1:3000/', displayMails)
 }
 
+let emails = [];
+for ( let i=0 ; i<8 ; i++ ) {
+    emails[i] = {
+        exp: 0,
+        date: 0,
+        subject: 0,
+    }
+}
+
 function displayMails(res) {
-    console.log(res);
+    for ( let i = 0 ; i < 8 ; i++ ) {
+        if (res[i]) {
+            emails[i].exp = extractExp(res[i].from[0]);
+            emails[i].subject = res[i].subject[0];
+            emails[i].date = new Date(extractDate(res[i].date));
+        }
+    }
+
+    // Créer l'affiche en fonction de certain critères
+
+    // Le mail vient t'il d'un expéditeur connu ?
+
+    // Le message est il toujours d'actualité ?
+
+
 }
 
 /* MODULE INDICE VELO
@@ -187,3 +209,14 @@ function replaceFirstChar( string, replaceWith ) {
     return res;
 }
 
+function extractExp(exp) {
+    var rx = /\<(.*)\>/;
+    var arr = rx.exec(exp);
+    return arr[1];
+}
+
+function extractDate(date) {
+    var rx = /\d.*\ /;
+    var arr = rx.exec(date);
+    return arr[0];
+}

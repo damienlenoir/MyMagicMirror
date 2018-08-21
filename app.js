@@ -1,6 +1,5 @@
 const http = require('http');
-const Imap = require('imap'),
-    inspect = require('util').inspect;
+const Imap = require('imap');
 var parsedJSON = require('./config.json'); // fichier de conf contenant info de connexion à la boite mail
 
 const imap = new Imap(parsedJSON);
@@ -8,8 +7,7 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-    let rep = messages.toString();
-    console.log(typeof rep);
+    let rep = JSON.stringify(messages);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -34,7 +32,7 @@ function getMessages() {
     imap.once('ready', function() {
         openInbox(function(err, box) {
             if (err) throw err;
-            var f = imap.seq.fetch('1:3', {
+            var f = imap.seq.fetch('1:4', {
                 bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
                 struct: true
             });
@@ -46,7 +44,7 @@ function getMessages() {
                         buffer += chunk.toString('utf8');
                     });
                     stream.once('end', function() {
-                        messages.push(inspect(Imap.parseHeader(buffer)));
+                        messages.push(Imap.parseHeader(buffer));
                     });
                 });
                 msg.once('attributes', function(attrs) {
