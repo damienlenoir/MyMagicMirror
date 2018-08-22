@@ -33,7 +33,7 @@ function getMessages() {
     imap.once('ready', function() {
         openInbox(function(err, box) {
             if (err) throw err;
-            var f = imap.seq.fetch('1:4', {
+            var f = imap.seq.fetch(box.messages.total - 4 + ':*', {
                 bodies: 'HEADER.FIELDS (FROM TO SUBJECT DATE)',
                 struct: true
             });
@@ -73,4 +73,4 @@ function addWhiteList() {
 }
 
 getMessages();
-setInterval(function(){ getMessages(); }, 1000 * 60 * 5);
+setInterval(function(){ getMessages(); }, 5000 ); //1000 * 60 * 5

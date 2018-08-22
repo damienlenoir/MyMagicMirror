@@ -167,10 +167,27 @@ function displayMails(res) {
             emails[i].date = new Date(extractDate(res[i].date));
         }
     }
-
+    console.log(emails)
     // Créer l'affiche en fonction de certain critères
+    const whiteList = res[0];
 
-    // Le mail vient t'il d'un expéditeur connu ?
+    for ( email of emails ) {
+
+        for ( authorized of whiteList.mail ) {
+
+            if ( authorized === email.exp ) {
+
+                console.log(authorized + ' est autorisé')
+                let now = new Date();
+
+                console.log(now)
+                console.log(email.date)
+
+            }
+        }
+
+
+    }
 
     // Le message est il toujours d'actualité ?
 
