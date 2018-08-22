@@ -167,31 +167,43 @@ function displayMails(res) {
             emails[i].date = new Date(extractDate(res[i].date));
         }
     }
-    console.log(emails)
-    // Créer l'affiche en fonction de certain critères
+
     const whiteList = res[0];
+    let postIts = [];
 
     for ( email of emails ) {
-
         for ( authorized of whiteList.mail ) {
-
             if ( authorized === email.exp ) {
-
-                console.log(authorized + ' est autorisé')
-                let now = new Date();
-
-                console.log(now)
-                console.log(email.date)
-
+                let limitDate = new Date();
+                limitDate.setDate(limitDate.getDate() - 2);
+                if ( limitDate < email.date) {
+                    postIts.push(email);
+                }
             }
         }
-
-
     }
 
-    // Le message est il toujours d'actualité ?
+    let messageMimie= '';
+    let dateMessMimie = new Date(0);
+    let messageDam= '';
+    let dateMessDam = new Date(0);
 
+    for ( let postIt of postIts) {
+        if ( postIt.exp.includes('emilie') ) {
+            if ( postIt.date > dateMessMimie){
+                dateMessMimie = postIt.date;
+                messageMimie = postIt.subject;
+            }
+        } else {
+            if ( postIt.date > dateMessDam){
+                dateMessDam = postIt.date;
+                messageDam = postIt.subject;
+            }
+        }
+    }
 
+    if (messageDam) htmlSet( 'postIt-dam', messageDam);
+    if (messageMimie) htmlSet( 'postIt-mimie', messageMimie);
 }
 
 /* MODULE INDICE VELO
