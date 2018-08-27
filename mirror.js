@@ -34,6 +34,7 @@ for ( let i=0 ; i<6 ; i++ ) {
         logicalCode: '',
         logo: '',
         jourSemaine: '',
+        velo: true,
     }
 }
 
@@ -68,6 +69,9 @@ function setMeteoForecast(res) {
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
         let n = jourPrev.getDate() - today.getDate();
+
+        // TODO : fix bug changement de mois
+
         if ( jourPrev.getHours() > 6 ) {
             previsions[n].jourSemaine = days[jourPrev.getDay()];
             previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
@@ -104,6 +108,20 @@ function setMeteoForecast(res) {
                 previsions[n].description = descrText;
                 previsions[n].icon = descrIcon;
             }
+
+            today.setHours(9)
+            today.setMinutes(30)
+
+            if ( today.getHours() >= 7 && today.getHours() < 9 ) {
+                console.log('heure ok')
+                // si demain semaine
+
+            }
+
+            // prend juste les heures cohérentes
+            if ( ( jourPrev.getHours() < 9 ) || ( jourPrev.getHours() >= 17 && jourPrev.getHours() < 19 ) ) {
+              //  console.log(jourPrev.getHours())
+            }
         }
     }
 
@@ -139,12 +157,21 @@ function buildForecastHTML( prev, index ) {
 // setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 // setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
 
-/*  MODULE POST-IT
- boite outlook: mon.miroir.magique@outlook.com
- need to install node.js and imap module
+
+/* MODULE INDICE VELO
+    regarde le temps et la température le matin à 9h, le soir à 18h
+    exclure le velo si - de 10 degré /  pluie.
+
+    si entre 7h30 et 8h30 =>
+        si demain semaine =>
+             cacl sur les 2 prochaines prev (8h et 17h)
+
  */
 
-// TODO: faire une white liste qui vient du serveur pour ne pas mettre les mails dans GIT
+
+
+
+/*  MODULE POST-IT */
 
 function callMails() {
     callWebService('http://127.0.0.1:3000/', displayMails)
@@ -192,12 +219,12 @@ function displayMails(res) {
         if ( postIt.exp.includes('emilie') ) {
             if ( postIt.date > dateMessMimie){
                 dateMessMimie = postIt.date;
-                messageMimie = postIt.subject;
+                messageMimie = '<img src="img/mimie.png"  class="icon">' + postIt.subject;
             }
         } else {
             if ( postIt.date > dateMessDam){
                 dateMessDam = postIt.date;
-                messageDam = postIt.subject;
+                messageDam = '<img src="img/dam.png"  class="icon">' + postIt.subject;
             }
         }
     }
@@ -206,9 +233,11 @@ function displayMails(res) {
     if (messageMimie) htmlSet( 'postIt-mimie', messageMimie);
 }
 
-/* MODULE INDICE VELO
-
- */
+// TODO : indice velo
+// TODO : automatisation de tout
+// TODO : optimisation de code
+// TODO : CSS
+// TODO : Installation sur Raspberry
 
 /* HELPERS */
 function htmlSet(id, value) {
