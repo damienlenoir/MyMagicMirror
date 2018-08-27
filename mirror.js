@@ -9,6 +9,8 @@ function getTime() {
     let sec   = dt.getSeconds().toString().padStart(2,"0");
     htmlSet("time", hours + ":" + min + ":" + sec);
     if (hours == 0 && min == 0) getDate();
+
+    // if ( dt.getHours() >= 7 && dt.getHours() < 9) veloOrCar(dt);
 }
 
 function getDate() {
@@ -69,9 +71,8 @@ function setMeteoForecast(res) {
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
         let n = Math.round( (jourPrev.getTime() - today.getTime()) / ( 1000 * 60 * 60 * 24) );
-
         if ( jourPrev.getHours() > 6 ) {
-            previsions[n].jourSemaine = days[jourPrev.getDay()];
+            previsions[n].jourSemaine = days[jourPrev.getDay() - 1 ];
             previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
                 f.main.temp_min : previsions[n].tempMin ;
             previsions[n].tempMax = ( !previsions[n].tempMax || f.main.temp_max > previsions[n].tempMax ) ?
@@ -106,24 +107,10 @@ function setMeteoForecast(res) {
                 previsions[n].description = descrText;
                 previsions[n].icon = descrIcon;
             }
-
-            today.setHours(9)
-            today.setMinutes(30)
-
-            if ( today.getHours() >= 7 && today.getHours() < 9 ) {
-                console.log('heure ok')
-                // si demain semaine
-
-            }
-
-            // prend juste les heures cohérentes
-            if ( ( jourPrev.getHours() < 9 ) || ( jourPrev.getHours() >= 17 && jourPrev.getHours() < 19 ) ) {
-              //  console.log(jourPrev.getHours())
-            }
         }
     }
 
-    for ( let i = 0 ; i < previsions.length ; i++ ) {
+    for ( let i = 1 ; i < previsions.length ; i++ ) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
         buildForecastHTML( previsions[i], i );
     }
@@ -165,6 +152,30 @@ function buildForecastHTML( prev, index ) {
              cacl sur les 2 prochaines prev (8h et 17h)
 
  */
+function veloOrCar() {
+    let now = new Date();
+
+    callMeteoForecast();
+
+    now.setHours(7);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    console.log(now);
+    console.log(previsions)
+
+    if ( now.getHours() < 9 ) {
+        console.log('matin')
+        // prev de 8h et 17h meme jour
+    } else if ( now.getHours() > 17 ) {
+        console.log('le soir')
+        // prev de 8h et 17h du lendemain
+    } else {
+        console.log('journee')
+        // prev de 17h du meme jour
+    }
+
+
+}
 
 
 
