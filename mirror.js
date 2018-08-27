@@ -68,9 +68,7 @@ function setMeteoForecast(res) {
     let today = new Date();
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
-        let n = jourPrev.getDate() - today.getDate();
-
-        // TODO : fix bug changement de mois
+        let n = Math.round( (jourPrev.getTime() - today.getTime()) / ( 1000 * 60 * 60 * 24) );
 
         if ( jourPrev.getHours() > 6 ) {
             previsions[n].jourSemaine = days[jourPrev.getDay()];

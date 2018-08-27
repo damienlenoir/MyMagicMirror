@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6903099c-611d-4162-88c7-9b776989bb10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/mirror.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -48,7 +47,7 @@
         <counts>
           <entry key="css" value="79" />
           <entry key="html" value="620" />
-          <entry key="js" value="9024" />
+          <entry key="js" value="9170" />
           <entry key="json" value="171" />
         </counts>
       </usages-collector>
@@ -57,7 +56,7 @@
           <entry key="CSS" value="79" />
           <entry key="HTML" value="620" />
           <entry key="JSON" value="171" />
-          <entry key="JavaScript" value="9024" />
+          <entry key="JavaScript" value="9170" />
         </counts>
       </usages-collector>
     </session>
@@ -118,8 +117,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/mirror.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="428">
-                  <caret line="72" column="44" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
+                <state relative-caret-position="248">
+                  <caret line="70" column="94" selection-start-line="70" selection-start-column="94" selection-end-line="70" selection-end-column="94" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
                     <element signature="n#!!block;n#buildForecastHTML#0" />
@@ -236,12 +235,12 @@
       <workItem from="1534747883066" duration="2314000" />
       <workItem from="1534939418092" duration="748000" />
       <workItem from="1535010918102" duration="8601000" />
-      <workItem from="1535373451541" duration="3912000" />
+      <workItem from="1535373451541" duration="5687000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93156000" />
+    <option name="totallyTimeSpent" value="94931000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="83" width="1922" height="1081" extended-state="6" />
@@ -328,8 +327,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mirror.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="72" column="44" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
+        <state relative-caret-position="248">
+          <caret line="70" column="94" selection-start-line="70" selection-start-column="94" selection-end-line="70" selection-end-column="94" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="n#!!block;n#buildForecastHTML#0" />
