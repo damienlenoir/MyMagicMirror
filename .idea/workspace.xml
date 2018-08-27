@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6903099c-611d-4162-88c7-9b776989bb10" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/mirror.html" beforeDir="false" afterPath="$PROJECT_DIR$/mirror.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mirror.js" beforeDir="false" afterPath="$PROJECT_DIR$/mirror.js" afterDir="false" />
-    </list>
+    <list default="true" id="6903099c-611d-4162-88c7-9b776989bb10" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -118,10 +115,11 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/mirror.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="451">
-                  <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+                <state relative-caret-position="494">
+                  <caret line="163" column="27" lean-forward="true" selection-start-line="163" selection-start-column="27" selection-end-line="163" selection-end-column="27" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
+                    <element signature="n#!!block;n#buildForecastHTML#0" />
                     <element signature="n#!!block;n#displayMails#0" />
                   </folding>
                 </state>
@@ -235,12 +233,12 @@
       <workItem from="1534747883066" duration="2314000" />
       <workItem from="1534939418092" duration="748000" />
       <workItem from="1535010918102" duration="8601000" />
-      <workItem from="1535373451541" duration="9183000" />
+      <workItem from="1535373451541" duration="9539000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98427000" />
+    <option name="totallyTimeSpent" value="98783000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="83" width="1922" height="1081" extended-state="6" />
@@ -327,10 +325,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mirror.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
+        <state relative-caret-position="494">
+          <caret line="163" column="27" lean-forward="true" selection-start-line="163" selection-start-column="27" selection-end-line="163" selection-end-column="27" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!block;n#buildForecastHTML#0" />
             <element signature="n#!!block;n#displayMails#0" />
           </folding>
         </state>

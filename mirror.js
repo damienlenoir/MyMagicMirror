@@ -163,6 +163,8 @@ function veloOrCar() {
     console.log(now);
     console.log(previsions)
 
+    // ajouter boolean velo directement dans le tableau de prev.
+
     if ( now.getHours() < 9 ) {
         console.log('matin')
         // prev de 8h et 17h meme jour
