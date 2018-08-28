@@ -1,6 +1,6 @@
 /* MODULE CLOCK */
 const months = ['janvier','février','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
-const days = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
+const days = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
 
 function getTime() {
     let dt    = new Date();
@@ -18,7 +18,7 @@ function getDate() {
     let day   = dt.getDay();
     let date  = dt.getDate();
     let month = dt.getMonth();
-    htmlSet( "date", days[day - 1] + " " + date + " " + months[month] );
+    htmlSet( "date", days[day] + " " + date + " " + months[month] );
 }
 
 setInterval(function(){ getTime(); }, 1000);
@@ -70,9 +70,11 @@ function setMeteoForecast(res) {
     let today = new Date();
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
+        // decalage horaire
+        jourPrev.setHours(jourPrev.getHours() - 2 );
         let n = Math.round( (jourPrev.getTime() - today.getTime()) / ( 1000 * 60 * 60 * 24) );
         if ( jourPrev.getHours() > 6 ) {
-            previsions[n].jourSemaine = days[jourPrev.getDay() - 1 ];
+            previsions[n].jourSemaine = days[jourPrev.getDay()];
             previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
                 f.main.temp_min : previsions[n].tempMin ;
             previsions[n].tempMax = ( !previsions[n].tempMax || f.main.temp_max > previsions[n].tempMax ) ?
@@ -84,22 +86,22 @@ function setMeteoForecast(res) {
             let descrText = f.weather[0].description;
             let descrIcon = f.weather[0].icon;
             let logicalCode = '';
-            if ( descrCode >= 600 && descrCode > 700 ) {
+            if ( descrCode >= 600 && descrCode < 700 ) {
                 logicalCode = replaceFirstChar(descrCode, '60')
             }
-            if ( descrCode >= 200 && descrCode > 300 ) {
+            if ( descrCode >= 200 && descrCode < 300 ) {
                 logicalCode = replaceFirstChar(descrCode, '50')
             }
-            if ( descrCode >= 500 && descrCode > 600 ) {
+            if ( descrCode >= 500 && descrCode < 600 ) {
                 logicalCode = replaceFirstChar(descrCode, '40')
             }
-            if ( descrCode >= 300 && descrCode > 400 ) {
+            if ( descrCode >= 300 && descrCode < 400 ) {
                 logicalCode = replaceFirstChar(descrCode, '30')
             }
-            if ( descrCode >= 700 && descrCode > 800 ) {
+            if ( descrCode >= 700 && descrCode < 800 ) {
                 logicalCode = replaceFirstChar(descrCode, '20')
             }
-            if ( descrCode >= 800 && descrCode > 900 ) {
+            if ( descrCode >= 800 ) {
                 logicalCode = replaceFirstChar(descrCode, '10')
             }
             if ( !previsions[n].logicalCode || logicalCode > previsions[n].logicalCode ) {
@@ -107,12 +109,19 @@ function setMeteoForecast(res) {
                 previsions[n].description = descrText;
                 previsions[n].icon = descrIcon;
             }
+
+            if ( (jourPrev.getHours() >= 7 && jourPrev.getHours() <= 9) || (jourPrev.getHours() >= 17 && jourPrev.getHours() <= 19) ) {
+                if ( f.main.temp < 12 || descrCode < 800) {
+                    previsions[n].velo = false;
+                }
+            }
+
         }
     }
 
     for ( let i = 1 ; i < previsions.length ; i++ ) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
-        buildForecastHTML( previsions[i], i );
+        if ( previsions[i].description) buildForecastHTML( previsions[i], i );
     }
 }
 
@@ -143,44 +152,27 @@ function buildForecastHTML( prev, index ) {
 // setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
 
 
-/* MODULE INDICE VELO
-    regarde le temps et la température le matin à 9h, le soir à 18h
-    exclure le velo si - de 10 degré /  pluie.
-
-    si entre 7h30 et 8h30 =>
-        si demain semaine =>
-             cacl sur les 2 prochaines prev (8h et 17h)
-
- */
 function veloOrCar() {
     let now = new Date();
+    let heureActuelle = now.getHours();
+    let jourActuel = now.getDay();
+    let demain = new Date ( now.getTime() + ( 1000 * 60 * 60 * 24) );
+    let jourDemain = demain.getDay();
 
-    callMeteoForecast();
+    if ( heureActuelle >= 18 && !isWeekend( jourDemain ) ) {
+        if ( previsions[1].velo ) {
+            htmlSet('veloOrCar',
+                '<p>Velo</p>')
 
-    now.setHours(7);
-    now.setMinutes(0);
-    now.setSeconds(0);
-    console.log(now);
-    console.log(previsions)
-
-    // ajouter boolean velo directement dans le tableau de prev.
-
-    if ( now.getHours() < 9 ) {
-        console.log('matin')
-        // prev de 8h et 17h meme jour
-    } else if ( now.getHours() > 17 ) {
-        console.log('le soir')
-        // prev de 8h et 17h du lendemain
-    } else {
-        console.log('journee')
-        // prev de 17h du meme jour
+        }
+    } else if ( heureActuelle < 14 && !isWeekend( jourActuel ) ) {
+        if ( previsions[0].velo ) {
+            htmlSet('veloOrCar',
+                '<p>Velo</p>')
+        }
     }
 
-
 }
-
-
-
 
 /*  MODULE POST-IT */
 
@@ -244,7 +236,6 @@ function displayMails(res) {
     if (messageMimie) htmlSet( 'postIt-mimie', messageMimie);
 }
 
-// TODO : indice velo
 // TODO : automatisation de tout
 // TODO : optimisation de code
 // TODO : CSS
@@ -288,4 +279,9 @@ function extractDate(date) {
     var rx = /\d.*\ /;
     var arr = rx.exec(date);
     return arr[0];
+}
+
+function isWeekend(jour) {
+    let rep = ( jour == 0 || jour == 6 ) ? true : false ;
+    return rep;
 }
