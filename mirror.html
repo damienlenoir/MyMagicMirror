@@ -6,40 +6,13 @@
     </head>
 
     <body>
-
         <div id="clock">
             <p id="time"></p>
             <p id="date"></p>
         </div>
 
         <div id="meteo">
-
-            <button id="api" onclick="callMeteo()">
-                weather
-            </button>
-            <button id="api" onclick="callMeteoForecast()">
-                Forecast
-            </button>
-
-            <div id="actualMeteo">
-                <table>
-                    <tr>
-                        <td><img src="img/wind.png"  class="icon"></td>
-                        <td>
-                            <span id="vitesseVentActuel"></span> Km/h
-                        </td>
-                        <td><img src="img/thermo.png" class="icon-thermo"></td>
-                        <td>
-                            <span id="tempActual" ></span>°C
-                        </td>
-                        <td>
-                            <img id="weatherImage" class="icon" src=""></td>
-                        <td>
-                            <span id="descriptionActual"></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+            <div id="actualMeteo"></div>
 
             <div id="forecast0"></div>
             <div id="forecast1"></div>
@@ -47,16 +20,6 @@
             <div id="forecast3"></div>
             <div id="forecast4"></div>
             <div id="forecast5"></div>
-
-
-            <button id="mails" onclick="callMails()">
-                Mails
-            </button>
-
-            <button id="f" onclick="veloOrCar()">
-                vel
-            </button>
-
         </div>
 
         <div id="postIts-magiques">

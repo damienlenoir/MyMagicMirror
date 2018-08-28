@@ -47,17 +47,17 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="79" />
-          <entry key="html" value="651" />
-          <entry key="js" value="11200" />
+          <entry key="html" value="669" />
+          <entry key="js" value="11372" />
           <entry key="json" value="171" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="79" />
-          <entry key="HTML" value="651" />
+          <entry key="HTML" value="669" />
           <entry key="JSON" value="171" />
-          <entry key="JavaScript" value="11200" />
+          <entry key="JavaScript" value="11372" />
         </counts>
       </usages-collector>
     </session>
@@ -69,8 +69,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/mirror.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-81">
-                  <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+                <state relative-caret-position="435">
+                  <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
                 </state>
               </provider>
             </entry>
@@ -118,11 +118,10 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/mirror.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="2638">
-                  <caret line="238" selection-start-line="238" selection-end-line="238" />
+                <state relative-caret-position="645">
+                  <caret line="82" column="46" selection-start-line="82" selection-start-column="46" selection-end-line="82" selection-end-column="46" />
                   <folding>
                     <element signature="n#!!doc" expanded="true" />
-                    <element signature="n#!!block;n#displayMails#0" />
                   </folding>
                 </state>
               </provider>
@@ -235,12 +234,12 @@
       <workItem from="1534747883066" duration="2314000" />
       <workItem from="1534939418092" duration="748000" />
       <workItem from="1535010918102" duration="8601000" />
-      <workItem from="1535373451541" duration="19595000" />
+      <workItem from="1535373451541" duration="20614000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108839000" />
+    <option name="totallyTimeSpent" value="109858000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1919" y="83" width="1922" height="1081" extended-state="6" />
@@ -320,18 +319,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mirror.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-81">
-          <caret line="10" column="29" lean-forward="true" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        <state relative-caret-position="435">
+          <caret line="29" column="34" lean-forward="true" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mirror.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2638">
-          <caret line="238" selection-start-line="238" selection-end-line="238" />
+        <state relative-caret-position="645">
+          <caret line="82" column="46" selection-start-line="82" selection-start-column="46" selection-end-line="82" selection-end-column="46" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#displayMails#0" />
           </folding>
         </state>
       </provider>

@@ -9,8 +9,6 @@ function getTime() {
     let sec   = dt.getSeconds().toString().padStart(2,"0");
     htmlSet("time", hours + ":" + min + ":" + sec);
     if (hours == 0 && min == 0) getDate();
-
-    // if ( dt.getHours() >= 7 && dt.getHours() < 9) veloOrCar(dt);
 }
 
 function getDate() {
@@ -20,10 +18,6 @@ function getDate() {
     let month = dt.getMonth();
     htmlSet( "date", days[day] + " " + date + " " + months[month] );
 }
-
-setInterval(function(){ getTime(); }, 1000);
-getDate();
-
 
 /* MODULE METEO */
 let previsions = [];
@@ -60,17 +54,33 @@ function setMeteoNow(res) {
     let descrTemps = res.weather[0].description;
     let icon = res.weather[0].icon;
     let iconSource = "img/" + icon + ".png";
-    htmlSet("vitesseVentActuel", vent);
-    htmlSet("tempActual", temp);
-    htmlSet("descriptionActual", descrTemps);
-    document.getElementById("weatherImage").src = iconSource;
+
+    let html =
+        '                <table>\n' +
+        '                    <tr>\n' +
+        '                        <td><img src="img/wind.png"  class="icon"></td>\n' +
+        '                        <td>\n' +
+        '                            <span>' + vent + '</span> Km/h\n' +
+        '                        </td>\n' +
+        '                        <td><img src="img/thermo.png" class="icon-thermo"></td>\n' +
+        '                        <td>\n' +
+        '                            <span>' + temp + '</span>°C\n' +
+        '                        </td>\n' +
+        '                        <td>\n' +
+        '                            <img class="icon" src="' + iconSource + '"></td>\n' +
+        '                        <td>\n' +
+        '                            <span id="descriptionActual">' + descrTemps + '</span>\n' +
+        '                        </td>\n' +
+        '                    </tr>\n' +
+        '                </table>';
+
+    htmlSet('actualMeteo', html);
 }
 
 function setMeteoForecast(res) {
     let today = new Date();
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
-        // decalage horaire
         jourPrev.setHours(jourPrev.getHours() - 2 );
         let n = Math.round( (jourPrev.getTime() - today.getTime()) / ( 1000 * 60 * 60 * 24) );
         if ( jourPrev.getHours() > 6 ) {
@@ -145,12 +155,7 @@ function buildForecastHTML( prev, index ) {
         '      </tr>\n' +
         '  </table>';
     htmlSet( 'forecast' + index , html );
-
 }
-
-// setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
-// setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
-
 
 function veloOrCar() {
     let now = new Date();
@@ -171,11 +176,9 @@ function veloOrCar() {
                 '<p>Velo</p>')
         }
     }
-
 }
 
 /*  MODULE POST-IT */
-
 function callMails() {
     callWebService('http://127.0.0.1:3000/', displayMails)
 }
@@ -236,11 +239,6 @@ function displayMails(res) {
     if (messageMimie) htmlSet( 'postIt-mimie', messageMimie);
 }
 
-// TODO : automatisation de tout
-// TODO : optimisation de code
-// TODO : CSS
-// TODO : Installation sur Raspberry
-
 /* HELPERS */
 function htmlSet(id, value) {
     document.getElementById(id).innerHTML = value;
@@ -285,3 +283,13 @@ function isWeekend(jour) {
     let rep = ( jour == 0 || jour == 6 ) ? true : false ;
     return rep;
 }
+
+/* LAUNCHERS */
+setInterval(function(){ getTime(); }, 1000);
+setInterval(function(){ veloOrCar(); }, 1000 * 60 * 5); // velo toutes les 5min
+setInterval(function(){ callMails(); }, 1000 * 60 * 5); // post its toutes les 5min
+setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
+setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
+callMeteoForecast();
+callMeteo();
+getDate();
