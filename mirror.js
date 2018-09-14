@@ -56,23 +56,12 @@ function setMeteoNow(res) {
     let iconSource = "img/" + icon + ".png";
 
     let html =
-        '                <table>\n' +
-        '                    <tr>\n' +
-        '                        <td><img src="img/wind.png"  class="icon"></td>\n' +
-        '                        <td>\n' +
-        '                            <span>' + vent + '</span> Km/h\n' +
-        '                        </td>\n' +
-        '                        <td><img src="img/thermo.png" class="icon-thermo"></td>\n' +
-        '                        <td>\n' +
-        '                            <span>' + temp + '</span>°C\n' +
-        '                        </td>\n' +
-        '                        <td>\n' +
-        '                            <img class="icon" src="' + iconSource + '"></td>\n' +
-        '                        <td>\n' +
-        '                            <span id="descriptionActual">' + descrTemps + '</span>\n' +
-        '                        </td>\n' +
-        '                    </tr>\n' +
-        '                </table>';
+        '<div><img src="img/wind.png"  class="icon"></div>\n' +
+        '<div>' + vent + ' Km/h </div> \n' +
+        '<div><img src="img/thermo.png" class="icon-thermo"></div>\n' +
+        '<div>' + temp + ' °C</div>\n' +
+        '<div><img class="icon" src="' + iconSource + '"></div>\n' +
+        '<div id="descriptionActual">' + descrTemps + '</div>';
 
     htmlSet('actualMeteo', html);
 }
@@ -137,23 +126,11 @@ function setMeteoForecast(res) {
 
 function buildForecastHTML( prev, index ) {
     let html =
-        '   <table>\n' +
-        '      <tr>\n' +
-        '         <td>' + prev.jourSemaine + '<img src="img/wind.png"  class="icon"></td>\n' +
-        '         <td>\n' +
-        '             <span> ' + prev.wind + ' </span> Km/h\n' +
-        '         </td>\n' +
-        '         <td><img src="img/thermo.png" class="icon-thermo"></td>\n' +
-        '         <td>\n' +
-        '             <span>' + prev.tempMin + ' / ' +  prev.tempMax + '</span>°C\n' +
-        '         </td>\n' +
-        '         <td>\n' +
-        '             <img id="weatherImage" class="icon" src="img/' + prev.icon + '.png"></td>\n' +
-        '         <td>\n' +
-        '             <span id="descriptionActual">' + prev.description + ' </span>\n' +
-        '         </td>\n' +
-        '      </tr>\n' +
-        '  </table>';
+        '<div class="wind"> ' + prev.wind + ' Km/h </div> \n' +
+        '<div class="thermo"> <img src="img/thermo.png" class="icon-thermo"></div>\n' +
+        '<div class="temp">' + prev.tempMin + ' / ' +  prev.tempMax + ' °C</div>\n' +
+        '<div class="description-temp" id="descriptionActual">' + prev.description + ' </div>'+
+        '<div class="logo-img"><img class="icon" src="img/' + prev.icon + '.png"></div>';
     htmlSet( 'forecast' + index , html );
 }
 
@@ -283,9 +260,9 @@ function isWeekend(jour) {
     let rep = ( jour == 0 || jour == 6 ) ? true : false ;
     return rep;
 }
-let messageMimie = '<img src="img/mimie.png"  class="icon">coucou couc ouc';
+let messageMimie = '<img src="img/mimie.png"  class="icon face">coucou couc ouc';
 htmlSet('postIt-mimie', messageMimie)
-let messageDam = '<img src="img/dam.png"  class="icon">blah blah blah';
+let messageDam = '<img src="img/dam.png"  class="icon face"><div class="text-msg">blah blah blahblah blah blahblah blah blahblah blah blahblah blah blah</div>';
 htmlSet('postIt-dam', messageDam)
 
 /* LAUNCHERS */

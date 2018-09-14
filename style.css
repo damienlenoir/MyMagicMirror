@@ -41,7 +41,9 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
+html {
+    max-height: 100%;
+}
 body {
     background-color: black;
     color: white;
@@ -59,7 +61,6 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 3%;
-    border: 1px solid white;
 }
 
 #time {
@@ -67,7 +68,6 @@ body {
     text-align: right;
     font-family: arial;
     text-align: center;
-    border: 1px solid white;
 }
 
 #date {
@@ -75,16 +75,18 @@ body {
      text-align: right;
      font-family: arial;
      text-align: center;
-    border: 1px solid white;
-
  }
 
 #meteo {
     margin-bottom: 3%;
+    font-size: x-large;
     border: 1px solid white;
 }
 
 #actualMeteo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
     border: 1px solid white;
 }
 
@@ -93,6 +95,7 @@ body {
 }
 
 #footer {
+    font-size: x-large;
     display: flex;
     border: 1px solid white;
 }
@@ -117,4 +120,17 @@ body {
 .icon-thermo {
     width: auto;
     height: 3em;
+}
+
+.forecast-container {
+    display: flex;
+    justify-content: center;
+}
+
+.face {
+    float: left;
+}
+
+.text-msg {
+    padding-top: 10px;
 }
