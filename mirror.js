@@ -144,13 +144,13 @@ function veloOrCar() {
     if ( heureActuelle >= 18 && !isWeekend( jourDemain ) ) {
         if ( previsions[1].velo ) {
             htmlSet('veloOrCar',
-                '<p>Velo</p>')
+                '<img class="icon" src="img/velo.png">')
 
         }
     } else if ( heureActuelle < 14 && !isWeekend( jourActuel ) ) {
         if ( previsions[0].velo ) {
             htmlSet('veloOrCar',
-                '<p>Velo</p>')
+                '<img class="icon" src="img/velo.png">')
         }
     }
 }
