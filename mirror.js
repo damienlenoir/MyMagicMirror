@@ -1,6 +1,6 @@
 /* MODULE CLOCK */
 const months = ['janvier','février','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'];
-const days = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+const days = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
 
 function getTime() {
     let dt    = new Date();
@@ -55,13 +55,17 @@ function setMeteoNow(res) {
     let icon = res.weather[0].icon;
     let iconSource = "img/" + icon + ".png";
 
-    let html =
-        '<div><img src="img/wind.png"  class="icon"></div>\n' +
-        '<div>' + vent + ' Km/h </div> \n' +
-        '<div><img src="img/thermo.png" class="icon-thermo"></div>\n' +
-        '<div>' + temp + ' °C</div>\n' +
-        '<div><img class="icon" src="' + iconSource + '"></div>\n' +
-        '<div id="descriptionActual">' + descrTemps + '</div>';
+    let html = '<div class="flex1">\n' +
+        '          <img src="img/wind.png"  class="icon">\n' +
+        '          <div>' + vent + ' Klm/h</div>\n' +
+        '       </div>\n' +
+        '       <div class="flex1">\n' +
+        '           <img src="img/thermo.png" class="icon-thermo">\n' +
+        '           <div>' + temp + ' °C</div>\n' +
+        '       </div>\n' +
+        '           <div class="flex2">\n' +
+        '           <img class="icon" src="' + iconSource + '">\n' +
+        '       </div>';
 
     htmlSet('actualMeteo', html);
 }
@@ -125,12 +129,24 @@ function setMeteoForecast(res) {
 }
 
 function buildForecastHTML( prev, index ) {
-    let html =
-        '<div class="wind"> ' + prev.wind + ' Km/h </div> \n' +
-        '<div class="thermo"> <img src="img/thermo.png" class="icon-thermo"></div>\n' +
-        '<div class="temp">' + prev.tempMin + ' / ' +  prev.tempMax + ' °C</div>\n' +
-        '<div class="description-temp" id="descriptionActual">' + prev.description + ' </div>'+
-        '<div class="logo-img"><img class="icon" src="img/' + prev.icon + '.png"></div>';
+    let html = '<div class="flex1 addPadding">\n' +
+        '          <span>' + prev.jourSemaine  +'</span>' +
+        '       </div>' +
+        '       <div class="flex1">\n' +
+        '          <img src="img/wind.png"  class="icon">\n' +
+        '          <div>' + prev.wind + ' Klm/h</div>\n' +
+        '       </div>\n' +
+        '       <div class="flex1">\n' +
+        '           <img src="img/thermo.png" class="icon-thermo">\n' +
+        '           <div>' + prev.tempMin + ' / ' +  prev.tempMax + ' °C</div>\n' +
+        '       </div>\n' +
+        '       <div class="flex1 noPadding">\n' +
+        '           <img class="big-icon" src="img/' +  prev.icon  + '.png">\n' +
+        '       </div>\n' +
+        '       </div>\n' +
+        '       <div class="flex1 addPadding">\n' +
+        '           <span>' + prev.description  +'</span>\n' +
+        '       </div>';
     htmlSet( 'forecast' + index , html );
 }
 
@@ -269,8 +285,10 @@ htmlSet('postIt-dam', messageDam)
 setInterval(function(){ getTime(); }, 1000);
 //setInterval(function(){ veloOrCar(); }, 1000 * 60 * 5); // velo toutes les 5min
 //setInterval(function(){ callMails(); }, 1000 * 60 * 5); // post its toutes les 5min
-setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
+//setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
 callMeteoForecast();
 callMeteo();
 getDate();
+
+// TODO: go all for real
