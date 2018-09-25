@@ -136,8 +136,7 @@ body {
 }
 
 .text-msg {
-    padding-top: 3%;
-    padding-left: 3%;
+    padding-top: 5%;
 }
 
 .flex1 {
@@ -157,4 +156,8 @@ body {
 
 .noPadding {
     padding-top: 0;
+}
+
+.postit {
+    text-align: center;
 }

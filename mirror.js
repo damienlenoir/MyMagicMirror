@@ -218,12 +218,12 @@ function displayMails(res) {
         if ( postIt.exp.includes('emilie') ) {
             if ( postIt.date > dateMessMimie){
                 dateMessMimie = postIt.date;
-                messageMimie = '<img src="img/mimie.png"  class="icon">' + postIt.subject;
+                messageMimie = '<img src="img/mimie.png"  class="icon face"><div class="text-msg">' + postIt.subject + '</div>';
             }
         } else {
             if ( postIt.date > dateMessDam){
                 dateMessDam = postIt.date;
-                messageDam = '<img src="img/dam.png"  class="icon">' + postIt.subject;
+                messageDam = '<img src="img/dam.png"  class="icon face"><div class="text-msg">' + postIt.subject + '</div>';
             }
         }
     }
@@ -276,19 +276,16 @@ function isWeekend(jour) {
     let rep = ( jour == 0 || jour == 6 ) ? true : false ;
     return rep;
 }
-let messageMimie = '<img src="img/mimie.png"  class="icon face">coucou couc ouc';
-htmlSet('postIt-mimie', messageMimie)
-let messageDam = '<img src="img/dam.png"  class="icon face"><div class="text-msg">blah blah blahblah blah blahblah blah blahblah blah blahblah blah blah</div>';
-htmlSet('postIt-dam', messageDam)
 
 /* LAUNCHERS */
 setInterval(function(){ getTime(); }, 1000);
-//setInterval(function(){ veloOrCar(); }, 1000 * 60 * 5); // velo toutes les 5min
-//setInterval(function(){ callMails(); }, 1000 * 60 * 5); // post its toutes les 5min
-//setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
+setInterval(function(){ veloOrCar(); }, 1000 * 60 * 5); // velo toutes les 5min
+setInterval(function(){ callMails(); }, 1000 * 60 * 5); // post its toutes les 5min
+setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
 callMeteoForecast();
 callMeteo();
 getDate();
+callMails();
 
 // TODO: go all for real
