@@ -73,4 +73,4 @@ function addWhiteList() {
 }
 
 getMessages();
-setInterval(function(){ getMessages(); }, 1000 * 60 * 5 ); 
+setInterval(function(){ getMessages(); }, 1000 * 60 * 5 );
