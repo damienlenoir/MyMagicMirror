@@ -1,0 +1,19 @@
+- Télécharger et copier les fichiers de NOOBS sur la carte SD, lancer le pi et faire l'install
+
+- Se connecter login pi, MPD: raspberry
+
+- Activer ssh dans les paramètres et connecter automatiquement en tant que user pi
+
+- faire les maj et installer: npm, nodejs, git, chromium-browser via aptitude
+
+- installer pm2 et imap via npm
+
+- cloner le projet: https://github.com/damienlenoir/MyMagicMirror
+
+- Installer les fichiers whiteliste.json et config.json à la racine de MyMagicMirror
+
+- Passer l'affichage en portrait: 
+sudo nano /boot/config.txt
+ajouter display_rotate=1 90 degrees
+
+- installer le script de démarrage
