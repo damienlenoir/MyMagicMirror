@@ -39,19 +39,16 @@ les lignes suivantes:
 cd .config/chromium/Default
 chattr +i Preferences
 
-
-TODO : Commande pour baiseer / augmenter backlight
-l'inclure dans le script python
-Executer le python au démarrage
-
 - Mettre en place le detecteur de mouvement pour eteindre l'ecran :
-Mettre le fichier pir.py sur /home/pi/
-Le rendre executable : chmod go+x pir.py
-Ajouter son chemin au fichier /etc/rc.local
-
+Mettre le fichier detecteur.py sur /home/pi/
+Créer un fichier pour eteindre: monitor_on.sh et pour eteindre monito_off.sh qui contiennent les commandes:
 vcgencmd display_power 0 // off
 vcgencmd display_power 1 // on
 
+Le rendre executable : chmod go+x detecteur.py
+Ajouter son chemin au fichier /etc/rc.local
 
+
+DONE \o/
 
 
