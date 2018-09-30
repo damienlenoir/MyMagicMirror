@@ -4,7 +4,7 @@
 
 - Activer ssh dans les paramètres et connecter automatiquement en tant que user pi
 
-- faire les maj et installer: npm, nodejs, git, chromium-browser via aptitude
+- faire les maj et installer: npm, nodejs via aptitude
 
 - installer pm2 et imap via npm
 
@@ -16,4 +16,42 @@
 sudo nano /boot/config.txt
 ajouter display_rotate=1 90 degrees
 
-- installer le script de démarrage
+- Installer le demarrage auto:
+
+1/ Mettre le script de demarrage de PM2 
+Dans /etc/rc.local mettre la commande bash suivante :
+pm2 start /home/pi/MyMagicMirror/app.js --max-memory-restart 100M 
+
+2/ Pour démarrer chromium sur la page et en fullscreen:
+Il faut ajouter dans le ficher de démarrage de X (interface graphique) présent à: /home/pi/.config/lxsession/LXDE-pi/autostart
+les lignes suivantes:
+
+@lxpanel --profile LXDE-pi
+@pcmanfm --desktop --profile LXDE-pi
+@xscreensaver -no-splash
+@point-rpi
+@xset s off
+@xset -dpms
+@xset s noblank
+@chromium-browser /home/pi/MyMagicMirror/mirror.html --start-fullscreen -disable--infobars
+
+- Pour couper les notif de chorme, il faut le fermer proprement puis mettre le fichier de préférence en lecture seule, pour que Chrome ne le modifie pas:
+cd .config/chromium/Default
+chattr +i Preferences
+
+
+TODO : Commande pour baiseer / augmenter backlight
+l'inclure dans le script python
+Executer le python au démarrage
+
+- Mettre en place le detecteur de mouvement pour eteindre l'ecran :
+Mettre le fichier pir.py sur /home/pi/
+Le rendre executable : chmod go+x pir.py
+Ajouter son chemin au fichier /etc/rc.local
+
+vcgencmd display_power 0 // off
+vcgencmd display_power 1 // on
+
+
+
+
