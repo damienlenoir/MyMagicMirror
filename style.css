@@ -43,6 +43,7 @@ table {
 }
 html {
     height: 100%;
+    cursor: none;
 }
 body {
     background-color: black;
