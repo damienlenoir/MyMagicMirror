@@ -228,8 +228,16 @@ function displayMails(res) {
         }
     }
 
-    if (messageDam) htmlSet( 'postIt-dam', messageDam);
-    if (messageMimie) htmlSet( 'postIt-mimie', messageMimie);
+    if (messageDam) {
+        htmlSet( 'postIt-dam', messageDam);
+    } else {
+        htmlSet( 'postIt-dam', '');
+    }
+    if (messageMimie) {
+        htmlSet( 'postIt-mimie', messageMimie);
+    } else {
+        htmlSet( 'postIt-mimie', '');
+    }
 }
 
 /* HELPERS */
