@@ -296,4 +296,9 @@ callMeteo();
 getDate();
 callMails();
 
-// TODO: go all for real
+/*
+        TODO:
+            - les valeurs ne sont pas remises à 0: pour les icon, les temp, le vent etc
+            - L'html de velo et de post it n'est pas remis à blanc
+            - tenter d'incliner l'affiche
+ */
