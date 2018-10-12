@@ -20,18 +20,21 @@ function getDate() {
 }
 
 /* MODULE METEO */
-let previsions = [];
-for ( let i=0 ; i<6 ; i++ ) {
-    previsions[i] = {
-        tempMin: 0,
-        tempMax: 0,
-        wind: 0,
-        description: '',
-        logicalCode: '',
-        logo: '',
-        jourSemaine: '',
-        velo: true,
+function newPrevision() {
+    let previsions = [];
+    for ( let i=0 ; i<6 ; i++ ) {
+        previsions[i] = {
+            tempMin: 0,
+            tempMax: 0,
+            wind: 0,
+            description: '',
+            logicalCode: '',
+            logo: '',
+            jourSemaine: '',
+            velo: true,
+        }
     }
+    return previsions;
 }
 
 function callMeteo() {
@@ -71,6 +74,8 @@ function setMeteoNow(res) {
 }
 
 function setMeteoForecast(res) {
+    let previsions = newPrevision();
+    console.log(previsions)
     let today = new Date();
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
@@ -156,19 +161,21 @@ function veloOrCar() {
     let jourActuel = now.getDay();
     let demain = new Date ( now.getTime() + ( 1000 * 60 * 60 * 24) );
     let jourDemain = demain.getDay();
+    let displayVelo = false;
+    let veloHTML = '';
 
     if ( heureActuelle >= 18 && !isWeekend( jourDemain ) ) {
         if ( previsions[1].velo ) {
-            htmlSet('veloOrCar',
-                '<img class="icon" src="img/velo.png">')
-
+            displayVelo = true;
         }
     } else if ( heureActuelle < 14 && !isWeekend( jourActuel ) ) {
         if ( previsions[0].velo ) {
-            htmlSet('veloOrCar',
-                '<img class="icon" src="img/velo.png">')
+            displayVelo = true;
         }
     }
+
+    if (displayVelo) veloHTML = '<img class="icon" src="img/velo.png">';
+    htmlSet('veloOrCar', veloHTML)
 }
 
 /*  MODULE POST-IT */
@@ -290,7 +297,7 @@ setInterval(function(){ getTime(); }, 1000);
 setInterval(function(){ veloOrCar(); }, 1000 * 60 * 5); // velo toutes les 5min
 setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
-setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60 * 2); //forecast toutes les 2h
+setInterval(function(){ callMeteoForecast(); }, 1000 * 30); //forecast toutes les 2h
 callMeteoForecast();
 callMeteo();
 getDate();
@@ -298,7 +305,5 @@ callMails();
 
 /*
         TODO:
-            - les valeurs ne sont pas remises à 0: pour les icon, les temp, le vent etc
-            - L'html de velo et de post it n'est pas remis à blanc
             - tenter d'incliner l'affiche
  */
