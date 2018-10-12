@@ -302,8 +302,3 @@ callMeteoForecast();
 callMeteo();
 getDate();
 callMails();
-
-/*
-        TODO:
-            - tenter d'incliner l'affiche
- */

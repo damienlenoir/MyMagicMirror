@@ -44,6 +44,7 @@ table {
 html {
     height: 100%;
     cursor: none;
+    transform:rotate(-1deg);
 }
 body {
     background-color: black;
