@@ -37,11 +37,9 @@ def main():
 
 def turn_on():
 	subprocess.call("sh /home/pi/monitor_on.sh", shell=True)
-	print "on"
+
 def turn_off():
 	subprocess.call("sh /home/pi/monitor_off.sh", shell=True)
-	print "off"
-
 
 
 if __name__ == '__main__':
