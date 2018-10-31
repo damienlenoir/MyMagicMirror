@@ -127,7 +127,7 @@ function setMeteoForecast(res) {
         }
     }
 
-    for ( let i = 1 ; i < previsions.length ; i++ ) {
+    for ( let i = 1 ; i < previsions.length-1 ; i++ ) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
         if ( previsions[i].description) buildForecastHTML( previsions[i], i );
     }
