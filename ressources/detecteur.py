@@ -6,8 +6,9 @@ import RPi.GPIO as io
 import subprocess
 
 io.setmode(io.BCM)
-SHUTOFF_DELAY = 3600 # in seconds, how long the monitor will be on until next button press or PIR detection
-PIR_PIN = 23     # 15 on the board (this needn't to be a PIR. Can be a button also)
+
+SHUTOFF_DELAY = 120 # in seconds, how long the monitor will be on until next button press or PIR detection
+PIR_PIN = 23       # 15 on the board (this needn't to be a PIR. Can be a button also)
 LED_PIN = 16      # optional, don't use as Relay-PIN. It just shows detection time of the PIR without delay time
 
 def main():
@@ -39,6 +40,7 @@ def turn_on():
 
 def turn_off():
 	subprocess.call("sh /home/pi/monitor_off.sh", shell=True)
+
 
 if __name__ == '__main__':
     try:
