@@ -75,7 +75,6 @@ function setMeteoNow(res) {
 
 function setMeteoForecast(res) {
     let previsions = newPrevision();
-    console.log(previsions)
     let today = new Date();
     for ( let f of res.list) {
         let jourPrev = new Date( f.dt * 1000);
@@ -195,7 +194,7 @@ for ( let i=0 ; i<9 ; i++ ) {
 function displayMails(res) {
     for ( let i = 1 ; i < 9 ; i++ ) {
         if (res[i]) {
-            emails[i].exp = extractExp(res[i].from[0]);
+            emails[i].exp = res[i].from[0];
             emails[i].subject = res[i].subject[0];
             emails[i].date = new Date(extractDate(res[i].date));
         }
