@@ -143,7 +143,7 @@ function buildForecastHTML( prev, index ) {
         '       </div>\n' +
         '       <div class="flex1">\n' +
         '           <img src="img/thermo.png" class="icon-thermo">\n' +
-        '           <div>' + prev.tempMin + ' / ' +  prev.tempMax + ' °C</div>\n' +
+        '           <div>' + Math.round(prev.tempMin) + ' / ' +  Math.round(prev.tempMax) + ' °C</div>\n' +
         '       </div>\n' +
         '       <div class="flex1 noPadding">\n' +
         '           <img class="big-icon" src="img/' +  prev.icon  + '.png">\n' +
