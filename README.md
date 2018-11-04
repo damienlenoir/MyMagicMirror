@@ -11,3 +11,10 @@ This code is to run personal DIY project of magic mirror
 - To manage and automatically restart the node server: install and run with PM2:
 http://pm2.keymetrics.io/docs/usage/quick-start/
 
+
+
+
+TODO:
+les messages via android ne passent pas a cause du formatage
+supprimer inclinaison
+baisser fréquence des forecast
