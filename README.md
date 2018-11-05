@@ -15,5 +15,5 @@ http://pm2.keymetrics.io/docs/usage/quick-start/
 
 
 TODO:
-les messages via android ne passent pas a cause du formatage
-baisser fréquence des forecast
+- Bug affichage des jours
+- MAJ sur Rpi de la whiteList

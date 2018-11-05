@@ -54,7 +54,6 @@ function callMeteoForecast() {
 function setMeteoNow(res) {
     let vent = convertWindSpeed(res.wind.speed);
     let temp = res.main.temp;
-    let descrTemps = res.weather[0].description;
     let icon = res.weather[0].icon;
     let iconSource = "img/" + icon + ".png";
 
@@ -122,11 +121,10 @@ function setMeteoForecast(res) {
                     previsions[n].velo = false;
                 }
             }
-
         }
     }
 
-    for ( let i = 0 ; i < previsions.length -2; i++ ) {
+    for ( let i = 1 ; i < previsions.length -1; i++ ) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
         if ( previsions[i].description) buildForecastHTML( previsions[i], i );
     }
@@ -294,7 +292,7 @@ function isWeekend(jour) {
 
 /* LAUNCHERS */
 setInterval(function(){ getTime(); }, 1000);
-setInterval(function(){ veloOrCar(); }, 1000 * 60 * 5); // velo toutes les 5min
+setInterval(function(){ veloOrCar(); }, 1000 * 60 * 30); // velo toutes les 30min
 setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
