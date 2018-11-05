@@ -124,7 +124,9 @@ function setMeteoForecast(res) {
         }
     }
 
-    for ( let i = 1 ; i < previsions.length -1; i++ ) {
+    let now = new Date();
+    let index = (now.getHours() > 12) ? 1 : 0; // Display current day forecast only the morning (after wouldn't be relevant)
+    for ( let i = index ; i < previsions.length -1; i++ ) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
         if ( previsions[i].description) buildForecastHTML( previsions[i], i );
     }

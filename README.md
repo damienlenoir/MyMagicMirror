@@ -15,5 +15,4 @@ http://pm2.keymetrics.io/docs/usage/quick-start/
 
 
 TODO:
-- Bug affichage des jours
 - MAJ sur Rpi de la whiteList
