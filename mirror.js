@@ -80,7 +80,6 @@ function setMeteoForecast(res) {
         let jourPrev = new Date( f.dt * 1000);
         jourPrev.setHours(jourPrev.getHours() - 2 );
         let n = Math.round( (jourPrev.getTime() - today.getTime()) / ( 1000 * 60 * 60 * 24) );
-        console.log(n)
         if ( jourPrev.getHours() > 6 ) {
             previsions[n].jourSemaine = days[jourPrev.getDay()];
             previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
@@ -126,7 +125,6 @@ function setMeteoForecast(res) {
 
         }
     }
-    console.log(previsions)
 
     for ( let i = 0 ; i < previsions.length -2; i++ ) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
@@ -196,8 +194,7 @@ for ( let i=0 ; i<9 ; i++ ) {
 function displayMails(res) {
     for ( let i = 1 ; i < 9 ; i++ ) {
         if (res[i]) {
-            console.log(res[i].from[0])
-            emails[i].exp = extractExp(res[i].from[0]);
+            emails[i].exp = res[i].from[0];
             emails[i].subject = res[i].subject[0];
             emails[i].date = new Date(extractDate(res[i].date));
         }
@@ -277,13 +274,10 @@ function replaceFirstChar( string, replaceWith ) {
     return res;
 }
 
+/// Deprecated, now using stict match /////
 function extractExp(exp) {
-    console.log('tttt')
-    console.log(exp)
     var rx = /\<(.*)\>/;
     var arr = rx.exec(exp);
-    console.log('arr')
-    console.log(arr)
     return arr[1];
 }
 
