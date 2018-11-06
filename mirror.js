@@ -79,7 +79,7 @@ function setMeteoForecast(res) {
         let jourPrev = new Date( f.dt * 1000);
         jourPrev.setHours(jourPrev.getHours() - 2 );
         let n = Math.round( (jourPrev.getTime() - today.getTime()) / ( 1000 * 60 * 60 * 24) );
-        if ( jourPrev.getHours() > 6 ) {
+        if ( jourPrev.getHours() > 6) {
             previsions[n].jourSemaine = days[jourPrev.getDay()];
             previsions[n].tempMin = ( !previsions[n].tempMin || f.main.temp_min < previsions[n].tempMin ) ?
                 f.main.temp_min : previsions[n].tempMin ;
@@ -124,9 +124,7 @@ function setMeteoForecast(res) {
         }
     }
 
-    let now = new Date();
-    let index = (now.getHours() > 12) ? 1 : 0; // Display current day forecast only the morning (after wouldn't be relevant)
-    for ( let i = index ; i < 4+index; i++ ) {
+    for (let i=1 ; i<5 ; i++) {
         previsions[i].wind = convertWindSpeed(previsions[i].wind);
         if ( previsions[i].description) buildForecastHTML( previsions[i], i );
     }
