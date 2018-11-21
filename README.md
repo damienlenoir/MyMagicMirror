@@ -12,7 +12,3 @@ This code is to run personal DIY project of magic mirror
 http://pm2.keymetrics.io/docs/usage/quick-start/
 
 
-
-
-TODO:
-- MAJ sur Rpi de la whiteList
