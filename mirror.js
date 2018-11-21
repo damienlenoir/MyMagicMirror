@@ -53,7 +53,7 @@ function callMeteoForecast() {
 
 function setMeteoNow(res) {
     let vent = convertWindSpeed(res.wind.speed);
-    let temp = res.main.temp;
+    let temp = Math.round(res.main.temp);
     let icon = res.weather[0].icon;
     let iconSource = "img/" + icon + ".png";
 
@@ -113,7 +113,7 @@ function setMeteoForecast(res) {
             if ( !previsions[n].logicalCode || logicalCode > previsions[n].logicalCode ) {
                 previsions[n].logicalCode = logicalCode;
                 previsions[n].description = descrText;
-                previsions[n].icon = descrIcon;
+                previsions[n].icon = descrIcon.replace("n", "d");
             }
 
             if ( (jourPrev.getHours() >= 7 && jourPrev.getHours() <= 9) || (jourPrev.getHours() >= 17 && jourPrev.getHours() <= 19) ) {
@@ -286,8 +286,7 @@ function extractDate(date) {
 }
 
 function isWeekend(jour) {
-    let rep = ( jour == 0 || jour == 6 ) ? true : false ;
-    return rep;
+    return ( jour === 0 || jour === 6 )
 }
 
 /* LAUNCHERS */
