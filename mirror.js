@@ -180,6 +180,15 @@ function callMails() {
     callWebService('http://127.0.0.1:3000/', displayMails)
 }
 
+
+function callQuotation() {
+    callOuestFrance('https://citations.ouest-france.fr/apis/export.php?t=day&author=&theme=&word=', displayQuotation)
+}
+
+function displayQuotation(res) {
+    htmlSet('citation', res);
+}
+
 let emails = [];
 for ( let i=0 ; i<9 ; i++ ) {
     emails[i] = {
@@ -260,6 +269,34 @@ function callWebService(url, callback) {
     xhttp.send();
 }
 
+function callOuestFrance(url, callback) {
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            callback( parseReponse(this.responseText));
+        }
+    };
+    xhttp.open( "GET", url, true);
+    xhttp.send();
+}
+
+function parseReponse (input) {
+
+    let strings = input.split(";");
+
+    var citation = strings[1];
+    citation = citation.substring(0, citation.length - 6);
+    citation = citation.replace('\\','');
+
+    var author = strings[3].split('"');
+    author = author[1];
+
+   return citation + " - " + author;
+}
+
+
+
 function convertWindSpeed( speed ) {
     return Math.round( speed * 3.6 );
 }
@@ -299,3 +336,4 @@ callMeteoForecast();
 callMeteo();
 getDate();
 callMails();
+callQuotation();
