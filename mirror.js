@@ -181,7 +181,7 @@ function callMails() {
 }
 
 
-function callQuotation() {
+function callQuote() {
     callOuestFrance('https://citations.ouest-france.fr/apis/export.php?t=day&author=&theme=&word=', displayQuotation)
 }
 
@@ -282,7 +282,6 @@ function callOuestFrance(url, callback) {
 }
 
 function parseReponse (input) {
-
     let strings = input.split(";");
 
     var citation = strings[1];
@@ -294,8 +293,6 @@ function parseReponse (input) {
 
    return citation + " - " + author;
 }
-
-
 
 function convertWindSpeed( speed ) {
     return Math.round( speed * 3.6 );
@@ -328,12 +325,13 @@ function isWeekend(jour) {
 
 /* LAUNCHERS */
 setInterval(function(){ getTime(); }, 1000);
-setInterval(function(){ veloOrCar(); }, 1000 * 60 * 30); // velo toutes les 30min
+// setInterval(function(){ veloOrCar(); }, 1000 * 60 * 30); // velo toutes les 30min
 setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
+setInterval(function(){ callQuote(); }, 1000 * 60 * 60 * 6); //quote tt les 6 toutes les 1h
 callMeteoForecast();
 callMeteo();
 getDate();
 callMails();
-callQuotation();
+callQuote();

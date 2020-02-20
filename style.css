@@ -162,3 +162,9 @@ body {
 .postit {
     text-align: center;
 }
+
+.citation {
+    width: 100%;
+    margin-bottom: 3%;
+    font-size: large;
+}
