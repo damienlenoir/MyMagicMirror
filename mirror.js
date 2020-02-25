@@ -330,7 +330,7 @@ setInterval(function(){ getTime(); }, 1000);
 setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
-setInterval(function(){ callQuote(); }, 1000 * 60 * 60 * 6); //quote tt les 6 toutes les 1h
+setInterval(function(){ callQuote(); }, 1000 * 60 * 60 * 4); //quote tt les 4h
 callMeteoForecast();
 callMeteo();
 getDate();
