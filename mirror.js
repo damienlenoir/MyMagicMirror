@@ -291,7 +291,8 @@ function parseReponse (input) {
     var author = strings[3].split('"');
     author = author[1];
 
-   return citation + " - " + author;
+    var res = citation + " - " + author;
+    return  res.replace("\\", "");
 }
 
 function convertWindSpeed( speed ) {
