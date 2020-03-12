@@ -270,7 +270,6 @@ function callWebService(url, callback) {
 }
 
 function callOuestFrance(url, callback) {
-
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -283,16 +282,12 @@ function callOuestFrance(url, callback) {
 
 function parseReponse (input) {
     let strings = input.split(";");
-
     var citation = strings[1];
     citation = citation.substring(0, citation.length - 6);
-    citation = citation.replace('\\','');
-
+    citation = citation.replace(/\\/g,'');
     var author = strings[3].split('"');
     author = author[1];
-
-    var res = citation + " - " + author;
-    return  res.replace("\\", "");
+    return  citation + " - " + author;
 }
 
 function convertWindSpeed( speed ) {
@@ -305,13 +300,6 @@ function replaceFirstChar( string, replaceWith ) {
         res = (c == 0) ? res + replaceWith : res + string[c];
     }
     return res;
-}
-
-/// Deprecated, now using stict match /////
-function extractExp(exp) {
-    var rx = /\<(.*)\>/;
-    var arr = rx.exec(exp);
-    return arr[1];
 }
 
 function extractDate(date) {
