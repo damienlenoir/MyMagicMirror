@@ -312,6 +312,41 @@ function isWeekend(jour) {
     return ( jour === 0 || jour === 6 )
 }
 
+var i = 0;
+function move() {
+    if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("myBar");
+        var width = 1;
+        var id = setInterval(frame, 10);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+                i = 0;
+            } else {
+                width++;
+                elem.style.width = width + "%";
+            }
+        }
+    }
+}
+
+function updateLoading() {
+    const now = new Date();
+    const fin = new Date('09/24/2020');
+    const diffTime = Math.abs(fin - now);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    let percent = ((280-diffDays) * 100) / 280;
+
+    var elem = document.getElementById("myBar");
+    elem.style.width = percent + "%";
+    elem.innerHTML = Math.ceil(percent) + "%";
+
+    var days = document.getElementById("days");
+    days.innerText = '  J- ' + diffDays;
+}
+
 /* LAUNCHERS */
 setInterval(function(){ getTime(); }, 1000);
 // setInterval(function(){ veloOrCar(); }, 1000 * 60 * 30); // velo toutes les 30min
@@ -319,8 +354,10 @@ setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
 setInterval(function(){ callQuote(); }, 1000 * 60 * 60 * 4); //quote tt les 4h
+setInterval(function(){ updateLoading(); }, 1000 * 60 * 60 * 12); //tt les 12 heures
 callMeteoForecast();
 callMeteo();
 getDate();
 callMails();
 callQuote();
+updateLoading();
