@@ -333,7 +333,7 @@ function move() {
 
 function updateLoading() {
     const now = new Date();
-    const fin = new Date('09/24/2020');
+    const fin = new Date('09/27/2020');
     const diffTime = Math.abs(fin - now);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
