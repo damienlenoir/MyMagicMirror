@@ -163,10 +163,12 @@ body {
     text-align: center;
 }
 
-.citation {
+.citation > div > a{
     width: 100%;
     margin-bottom: 3%;
     font-size: xx-large;
+    color: white;
+    text-decoration: none;
 }
 #myProgress {
     width: 100%;

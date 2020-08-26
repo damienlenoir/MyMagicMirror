@@ -180,15 +180,6 @@ function callMails() {
     callWebService('http://127.0.0.1:3000/', displayMails)
 }
 
-
-function callQuote() {
-    callOuestFrance('https://citations.ouest-france.fr/apis/export.php?t=day&author=&theme=&word=', displayQuotation)
-}
-
-function displayQuotation(res) {
-    htmlSet('citation', res);
-}
-
 let emails = [];
 for ( let i=0 ; i<9 ; i++ ) {
     emails[i] = {
@@ -269,27 +260,6 @@ function callWebService(url, callback) {
     xhttp.send();
 }
 
-function callOuestFrance(url, callback) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            callback( parseReponse(this.responseText));
-        }
-    };
-    xhttp.open( "GET", url, true);
-    xhttp.send();
-}
-
-function parseReponse (input) {
-    let strings = input.split(";");
-    var citation = strings[1];
-    citation = citation.substring(0, citation.length - 6);
-    citation = citation.replace(/\\/g,'');
-    var author = strings[3].split('"');
-    author = author[1];
-    return  citation + " - " + author;
-}
-
 function convertWindSpeed( speed ) {
     return Math.round( speed * 3.6 );
 }
@@ -333,7 +303,7 @@ function move() {
 
 function updateLoading() {
     const now = new Date();
-    const fin = new Date('09/27/2020');
+    const fin = new Date('09/23/2020');
     const diffTime = Math.abs(fin - now);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
@@ -353,11 +323,9 @@ setInterval(function(){ getTime(); }, 1000);
 setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
-setInterval(function(){ callQuote(); }, 1000 * 60 * 60 * 4); //quote tt les 4h
 setInterval(function(){ updateLoading(); }, 1000 * 60 * 60 * 12); //tt les 12 heures
 callMeteoForecast();
 callMeteo();
 getDate();
 callMails();
-callQuote();
 updateLoading();
