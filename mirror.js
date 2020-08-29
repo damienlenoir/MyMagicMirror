@@ -317,10 +317,28 @@ function updateLoading() {
     days.innerText = '  J- ' + diffDays;
 }
 
+function updateCitation() {
+    type="day";
+    console.log('bim')
+    empty = '';
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://citations.ouest-france.fr/apis/export.php?json&key=464fzer5&t='+escape(type)+'&author='+empty+'&theme='+empty+'&word='+empty, true);
+    request.send(null);
+
+    request.onload = function(){
+        if (request.status >= 200 && request.status < 400){
+            var data = JSON.parse(request.responseText);
+            content = '<div><a href="'+data.getlink+'" rel="nofollow noopener" target="_blank">' + data.quote + '</a></br></br>- <a href="'+data.authorlink+'" rel="nofollow noopener" target="_blank">'+data.name +'</a></div>';
+            document.getElementById('QuoteOFDay').innerHTML = content;
+        }
+    };
+}
+
 /* LAUNCHERS */
 setInterval(function(){ getTime(); }, 1000);
-// setInterval(function(){ veloOrCar(); }, 1000 * 60 * 30); // velo toutes les 30min
 setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
+setInterval(function(){ updateCitation(); }, 1000 * 60 * 60 * 4); // citation tt les 4h
+setInterval(function(){ updateCitation(); }, 1000 ); // citation tt les 4h
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
 setInterval(function(){ updateLoading(); }, 1000 * 60 * 60 * 12); //tt les 12 heures
@@ -329,3 +347,4 @@ callMeteo();
 getDate();
 callMails();
 updateLoading();
+updateCitation();
