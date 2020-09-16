@@ -107,10 +107,6 @@ body {
     width: 80%;
 }
 
-#veloOrCar {
-    width: 25%;
-}
-
 .icon {
     width: 4em;
     height: auto;
@@ -169,21 +165,4 @@ body {
     font-size: xx-large;
     color: white;
     text-decoration: none;
-}
-#myProgress {
-    width: 100%;
-    background-color: darkslategrey;
-}
-
-#myBar {
-    width: 10%;
-    height: 30px;
-    background-color: powderblue;
-    text-align: center; /* To center it horizontally (if you want) */
-    line-height: 30px; /* To center it vertically */
-    color: black;
-}
-
-#loading {
-    margin-top: 12%;
 }

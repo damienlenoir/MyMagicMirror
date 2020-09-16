@@ -152,29 +152,6 @@ function buildForecastHTML( prev, index ) {
     htmlSet( 'forecast' + index , html );
 }
 
-function veloOrCar() {
-    let now = new Date();
-    let heureActuelle = now.getHours();
-    let jourActuel = now.getDay();
-    let demain = new Date ( now.getTime() + ( 1000 * 60 * 60 * 24) );
-    let jourDemain = demain.getDay();
-    let displayVelo = false;
-    let veloHTML = '';
-
-    if ( heureActuelle >= 18 && !isWeekend( jourDemain ) ) {
-        if ( previsions[1].velo ) {
-            displayVelo = true;
-        }
-    } else if ( heureActuelle < 14 && !isWeekend( jourActuel ) ) {
-        if ( previsions[0].velo ) {
-            displayVelo = true;
-        }
-    }
-
-    if (displayVelo) veloHTML = '<img class="icon" src="img/velo.png">';
-    htmlSet('veloOrCar', veloHTML)
-}
-
 /*  MODULE POST-IT */
 function callMails() {
     callWebService('http://127.0.0.1:3000/', displayMails)
@@ -282,41 +259,6 @@ function isWeekend(jour) {
     return ( jour === 0 || jour === 6 )
 }
 
-var i = 0;
-function move() {
-    if (i == 0) {
-        i = 1;
-        var elem = document.getElementById("myBar");
-        var width = 1;
-        var id = setInterval(frame, 10);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-                i = 0;
-            } else {
-                width++;
-                elem.style.width = width + "%";
-            }
-        }
-    }
-}
-
-function updateLoading() {
-    const now = new Date();
-    const fin = new Date('09/23/2020');
-    const diffTime = Math.abs(fin - now);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    let percent = ((280-diffDays) * 100) / 280;
-
-    var elem = document.getElementById("myBar");
-    elem.style.width = percent + "%";
-    elem.innerHTML = Math.ceil(percent) + "%";
-
-    var days = document.getElementById("days");
-    days.innerText = '  J- ' + diffDays;
-}
-
 function updateCitation() {
     type="day";
     console.log('bim')
@@ -341,10 +283,8 @@ setInterval(function(){ updateCitation(); }, 1000 * 60 * 60 * 4); // citation tt
 setInterval(function(){ updateCitation(); }, 1000 ); // citation tt les 4h
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
-setInterval(function(){ updateLoading(); }, 1000 * 60 * 60 * 12); //tt les 12 heures
 callMeteoForecast();
 callMeteo();
 getDate();
 callMails();
-updateLoading();
 updateCitation();
