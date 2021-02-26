@@ -160,7 +160,7 @@ function displayBtc(res) {
 }
 
 function bitcoinPrice() {
-    callWebService(
+    callWebServiceOpenAccess(
         'http://rest.coinapi.io/v1/exchangerate/BTC/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
         displayBtc
     )
@@ -172,7 +172,7 @@ function displayEth(res) {
 }
 
 function ethPrice() {
-    callWebService(
+    callWebServiceOpenAccess(
         'http://rest.coinapi.io/v1/exchangerate/ETH/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
         displayEth
     )
@@ -260,6 +260,19 @@ function callWebService(url, callback) {
         }
     };
     xhttp.open( "GET", url, true);
+    xhttp.send();
+}
+
+function callWebServiceOpenAccess(url, callback) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+            callback( JSON.parse(this.responseText) );
+        }
+    };
+    xhttp.open( "GET", url, true);
+    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
     xhttp.send();
 }
 
