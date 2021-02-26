@@ -97,6 +97,7 @@ body {
 
 #footer {
     flex: 1;
+    flex-direction: column;
     font-size: x-large;
     display: flex;
 }
