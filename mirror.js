@@ -161,7 +161,7 @@ function displayBtc(res) {
 
 function bitcoinPrice() {
     callWebService(
-        'https://rest.coinapi.io/v1/exchangerate/BTC/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
+        'http://rest.coinapi.io/v1/exchangerate/BTC/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
         displayBtc
     )
 }
@@ -173,7 +173,7 @@ function displayEth(res) {
 
 function ethPrice() {
     callWebService(
-        'https://rest.coinapi.io/v1/exchangerate/ETH/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
+        'http://rest.coinapi.io/v1/exchangerate/ETH/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
         displayEth
     )
 }
