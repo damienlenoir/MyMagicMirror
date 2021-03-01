@@ -160,7 +160,7 @@ function displayBtc(res) {
 }
 
 function bitcoinPrice() {
-    callWebServiceOpenAccess(
+    callWebService(
         'http://rest.coinapi.io/v1/exchangerate/BTC/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
         displayBtc
     )
@@ -172,7 +172,7 @@ function displayEth(res) {
 }
 
 function ethPrice() {
-    callWebServiceOpenAccess(
+    callWebService(
         'http://rest.coinapi.io/v1/exchangerate/ETH/EUR/?apikey=107EE3E4-42D0-4819-912B-37FF1888A09F',
         displayEth
     )
@@ -263,19 +263,6 @@ function callWebService(url, callback) {
     xhttp.send();
 }
 
-function callWebServiceOpenAccess(url, callback) {
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-
-        if (this.readyState == 4 && this.status == 200) {
-            callback( JSON.parse(this.responseText) );
-        }
-    };
-    xhttp.open( "GET", url, true);
-    xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
-    xhttp.send();
-}
-
 function convertWindSpeed( speed ) {
     return Math.round( speed * 3.6 );
 }
@@ -321,7 +308,7 @@ setInterval(function(){ callMails(); }, 1000 * 60); // post its toutes les min
 setInterval(function(){ updateCitation(); }, 1000 * 60 * 60 * 4); // citation tt les 4h
 setInterval(function(){ callMeteo(); }, 1000 * 60 * 30); // meteo actuelle toute les 30 minutes
 setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 60); //forecast toutes les 1h
-setInterval(function(){ callMeteoForecast(); }, 1000 * 60 * 30); // crypto price tt les 30 min
+setInterval(function(){ bitcoinPrice(); }, 1000 * 60 * 30); // crypto price tt les 30 min
 callMeteoForecast();
 callMeteo();
 getDate();
