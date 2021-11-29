@@ -12,3 +12,19 @@ This code is to run personal DIY project of magic mirror
 http://pm2.keymetrics.io/docs/usage/quick-start/
 
 
+Memo for PIR connection :
+
+
+ __________________________________
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|                                  |
+|           ....................   |
+|           ............O....Y.R   |
+___________________________________
